@@ -1,0 +1,50 @@
+/* placeholder background */
+
+body{
+    /* this margin setting prevents whitespace and an automatic margin 8 */
+    margin: 0;
+}
+
+/* Header banner, splash image, logo, title: */
+#header {
+    align-content: center;
+    height: 18%;
+    width: 100%;
+    background-color: lightblue;
+}
+
+h1 {
+    font-family: 'Days One', sans-serif;
+}
+
+#title {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Navigation menu, containing links, category dropdown options */
+#navMenu {
+    width: 100%;
+    background-color: gray;
+}
+
+#navMenu span {
+    padding: 25px;
+    color: white;
+}
+
+/* main content -- products or cart */
+#main {
+    height: 40%;
+    background-color:honeydew;
+}
+
+/* footer -- copyright info, contact details, legalese */
+#footer {
+    width: 100%;
+    background-color: gray;
+    position: absolute;
+    bottom: 0;
+}
