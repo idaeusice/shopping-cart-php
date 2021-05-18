@@ -1,0 +1,82 @@
+/* placeholder background */
+
+body{
+    /* this margin setting prevents whitespace and an automatic margin 8 */
+    margin: 0;
+}
+
+content {
+    height: 100vh;
+}
+
+a {
+    color:black;
+    text-decoration: none;
+}
+
+/* Header banner, splash image, logo, title: */
+#header {
+    align-content: center;
+    height: 100px;
+    width: 100%;
+    background-color: slategrey;
+    top: 0;
+    position: fixed;
+}
+
+h1 {
+    font-family: 'Days One', sans-serif;
+}
+
+#title {
+    width: 100%;
+    height: 80%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Navigation menu, containing links, category dropdown options */
+#navMenu {
+    width: 100%;
+    margin-top: -3px;
+    background-color: gray;
+    position: fixed;
+}
+
+#navMenu span {
+    padding-left: 25px;
+    padding-right: 25px;
+    color: white;
+}
+
+/* main content -- products or cart */
+#main {
+    height: auto;
+    clear: both;
+    margin-top: 100px; /* height of the header */
+    background-color:honeydew;
+    position: relative;
+    z-index: -1;
+    margin-bottom: 0;
+}
+
+#products {
+    padding: 50px;
+    height: 450px;
+}
+
+/* footer -- copyright info, contact details, legalese */
+#footer {
+    width: 100%;
+    height: 40px;
+    background-color: gray;
+    position: relative;
+    bottom: 0;
+    margin: 0;
+}
+
+#footer p {
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+}
