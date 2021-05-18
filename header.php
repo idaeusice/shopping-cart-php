@@ -8,7 +8,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- fonts and stylesheets -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Days+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="includes/styles.css">
     </head>
