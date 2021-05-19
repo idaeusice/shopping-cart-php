@@ -5,6 +5,7 @@
     print "</div>";
 ?>
 
+<!-- include in a modal? --> 
 <div id='loginContainer' style='margin-top: 200px; height: 50%;'>
     <div id='loginForm' style='position: relative; display: block; margin: auto;'>
         <form class='form' action='main.php'>
