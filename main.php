@@ -31,13 +31,22 @@ footer include (separate file)
             <div class='container'>
                 <div class='row'>
                     <div class='col-sm border-right'>
-                        Image goes here
+                        <img class='prodImage' src='./includes/resources/images/sample.jpg'>
                     </div>
                     <div class='col-sm border-right'>
-                        Title/Description goes here
+                        <h3>Samsung Galaxy S21</h3>
                     </div>
                     <div class='col-sm'>
-                        Price and buttons go here
+                        <div class='row'>
+                            <div class='col-sm'>
+                                <h3 style='padding-left: 10px; position: relative; justify-content: center; align-items: center;'>$899.99</h3>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-sm'>
+                                <h3 style='padding-left: 10px;'><button type="button" class="btn btn-success">Add to Cart</button></h3>
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
