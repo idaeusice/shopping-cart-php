@@ -43,6 +43,7 @@ h1 {
 }
 
 #navMenu span {
+    margin-top: -10px;
     padding-left: 25px;
     padding-right: 25px;
 }
@@ -63,19 +64,20 @@ h1 {
 
 /* main content -- products or cart */
 #main {
-    height: auto;
     clear: both;
-    margin-top: 100px; /* height of the header */
+    width: 100%;
+    top: 108px; /* height of the header */
     background-color:whitesmoke;
-    position: relative;
-    z-index: -1;
-    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    z-index: -2;
 }
 
 #products {
-    padding: 50px;
-    height: 450px;
-    overflow-y: scroll;
+    clear: both;
+    position: relative;
+    height: 100%;
+    z-index: -1;
 }
 
 .prodImage{
@@ -83,16 +85,16 @@ h1 {
 }
 
 /* footer -- copyright info, contact details, legalese */
-#footer {
+footer {
     width: 100%;
-    height: 40px;
+    height: 35px;
     background-color: gray;
     position: absolute;
     bottom: 0;
-    margin: 0;
+    bottom: 0;
 }
 
-#footer p {
+footer p {
     text-align: center;
     padding-top: 10px;
     font-family: Arial, Helvetica, sans-serif;

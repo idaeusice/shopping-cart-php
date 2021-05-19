@@ -5,7 +5,7 @@ header include (separate file)
     splash image + Daintree label
     nav menu include:
         home
-        categories
+        categories (dropdown)
         sign in (if signed in, then sign out)
         my cart
 main body section (contains products)
@@ -22,43 +22,35 @@ footer include (separate file)
     print "</div>";
 ?>
 
-    <div id='main'>
-        <div id='products'>
-        <!-- dynamically populated with products using php. 
-            if looking at cart, remove the product elems and show cart instead. 
-            when clicking to go to categories, remove product elems (should be in one div),
-            then show only the relevant products -->
-            <div class='container'>
-                <div class='row'>
-                    <div class='col-sm border-right'>
-                        <img class='prodImage' src='./includes/resources/images/sample.jpg'>
-                    </div>
-                    <div class='col-sm border-right'>
-                        <h3>Samsung Galaxy S21</h3>
-                    </div>
+<div id='main'>
+    <div id='products' class='container'>
+    <!-- dynamically populated with products using php. 
+        if looking at cart, remove the product elems and show cart instead. 
+        when clicking to go to categories, remove product elems (should be in one div),
+        then show only the relevant products -->
+        <div class='row'>
+            <div class='col-sm border-right'>
+                <img class='prodImage' src='./includes/resources/images/sample.jpg'>
+            </div>
+            <div class='col-sm border-right' style='margin:auto;'>
+                <h3>Samsung Galaxy S21</h3>
+            </div>
+            <div class='col-sm' style='margin:auto;'>
+                <div class='row container'>
                     <div class='col-sm'>
-                        <div class='row'>
-                            <div class='col-sm'>
-                                <h3 style='padding-left: 10px; position: relative; justify-content: center; align-items: center;'>$899.99</h3>
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <div class='col-sm'>
-                                <h3 style='padding-left: 10px;'><button type="button" class="btn btn-success">Add to Cart</button></h3>
-                            </div>
-                        </div>
+                        <h3>$899.99</h3>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Add to Cart
+                        </button>
                     </div>
-                    
                 </div>
-        
             </div>
         </div>
     </div>
+</div>
 
 <?php
-    print "<div id='footer'>";
-        include ('footer.php');
-    print "</div>";
+    include ('footer.php');
 ?>
 
 </div> <!-- end of content div -->
