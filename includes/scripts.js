@@ -17,3 +17,13 @@ function login() {
 function logout() {
     $('#loggedInText').html('Log Out');
 }
+
+function validateSignup(){
+
+}
+
+function validateLogin(){
+    var valid = false;
+    
+    return valid;
+}
