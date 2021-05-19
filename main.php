@@ -15,7 +15,6 @@ main body section (contains products)
         price, button to add to cart
 footer include (separate file)
 -->
-<div id='content'>
 <?php
     print "<div id='header'>";
         include ('header.php');//title
@@ -29,6 +28,21 @@ footer include (separate file)
             if looking at cart, remove the product elems and show cart instead. 
             when clicking to go to categories, remove product elems (should be in one div),
             then show only the relevant products -->
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-sm border-right'>
+                        Image goes here
+                    </div>
+                    <div class='col-sm border-right'>
+                        Title/Description goes here
+                    </div>
+                    <div class='col-sm'>
+                        Price and buttons go here
+                    </div>
+                    
+                </div>
+        
+            </div>
         </div>
     </div>
 
@@ -38,4 +52,4 @@ footer include (separate file)
     print "</div>";
 ?>
 
-</div>
+</div> <!-- end of content div -->
