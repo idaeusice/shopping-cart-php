@@ -99,3 +99,10 @@ h1 {
     vertical-align: middle;
     margin: 0;
 }
+
+/* Modals */
+#login {
+    width: 50%;
+    height: 50%;
+    background-color: grey;
+}
