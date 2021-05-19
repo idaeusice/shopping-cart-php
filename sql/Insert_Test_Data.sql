@@ -2,6 +2,8 @@
 -- Schema daintree_db
 -- -----------------------------------------------------
 
+-- This file inserts all of the test data
+
 INSERT INTO `daintree_db`.`product` (`prod_id`, `name`, `price`, `units`) VALUES ('1', 'Test Product', '10', '50');
 INSERT INTO `daintree_db`.`product` (`prod_id`, `name`, `price`, `units`) VALUES ('2', 'Test Product 2', '20', '100');
 INSERT INTO `daintree_db`.`product` (`prod_id`, `name`, `price`, `units`) VALUES ('3', 'Test Product 3', '15', '390');
