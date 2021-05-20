@@ -14,5 +14,5 @@
     </head>
     <body>
         <div id='title'>
-        <h1><span style='color: orange;'>Dain</span>tree</h1>
+        <h1><a href="main.php"><span style='color: orange;'>Dain</span>tree</a></h1>
         </div>

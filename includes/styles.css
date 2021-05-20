@@ -33,6 +33,11 @@ h1 {
     color: white;
 }
 
+#header a {
+    color: white;
+    text-decoration: none;
+}
+
 /* Navigation menu, containing links, category dropdown options */
 #navMenu {
     width: 100%;
