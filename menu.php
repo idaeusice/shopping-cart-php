@@ -1,6 +1,6 @@
-<div id='navMenu' class='navbar'>
-    <span id='navHome'><a href='main.php'>home</a></span>
-    <span id='navCategories'><a href='#'>categories_dropdown</a></span>
-    <span id='navCart' class='material-icons'><a href='cart.php'>add_shopping_cart</a></span>
-    <span id='loggedInText'><a href='loginForm.php'>Log In</a></span>
+<div id='navbar' class='navbar navbar-dark bg-dark sticky'>
+    <div id='navHome'><a href='main.php'>home</a></div>
+    <div id='navCategories'><a href='#'>categories_dropdown</a></div>
+    <div id='navCart' class='material-icons'><a href='cart.php'>add_shopping_cart</a></div>
+    <div id='loggedInText'><a href='loginForm.php'><?php echo 'Log In' ?></a></div>
 </div>
