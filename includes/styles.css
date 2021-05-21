@@ -28,6 +28,11 @@ h1 {
     color: white;
 }
 
+#title h1 a {
+    color: white;
+    text-decoration: none;
+}
+
 /* Navigation menu, containing links, category dropdown options -- changed to bootstrap styling */
 .sticky {
     width: auto;
