@@ -35,12 +35,10 @@ h1 {
 
 /* Navigation menu, containing links, category dropdown options -- changed to bootstrap styling */
 .sticky {
-    /* width: auto !important; */
     position: fixed !important;
     z-index: 100;
     width: 100% !important;
     top: 0 !important;
-    /* //top: 0 !important;  */
 }
 
 #navbar {
@@ -48,6 +46,16 @@ h1 {
     background-color: #003366;
 }
 
+#navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#navbar a:hover {
+    color: orange;
+    transition: color 0.2s;
+}
 
 #navMenu span a {
     color: white;
