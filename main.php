@@ -16,7 +16,7 @@ main body section (contains products)
 footer include (separate file)
 -->
 <?php
-    print "<div id='header'>";
+    print "<div id='header' class='sticky'>";
         include ('header.php');//title
         include ('menu.php');
     print "</div>";
