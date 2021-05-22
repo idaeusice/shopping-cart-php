@@ -75,10 +75,9 @@ h1 {
 #main {
     clear: both;
     width: 100%;
-    background-color:whitesmoke;
+    background-color:white;
     bottom: 0;
     z-index: -2;
-    height: 100vh;
 }
 
 #products {
@@ -100,9 +99,15 @@ h1 {
 
 /* footer -- copyright info, contact details, legalese, etc. */
 .footer {
-    width: auto;
     bottom: 0;
+    clear: both;
+    padding-top: 10em;
+    padding-bottom: 8em;
+    background-color: whitesmoke;
+    margin: 0;
+    max-width: 100% !important;
 }
+
 
 /* Login + Signup Styles */
 #signupBanner {
