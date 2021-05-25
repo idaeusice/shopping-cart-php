@@ -7,20 +7,7 @@ print "</div>";
 include ('connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    session_start();
-
-    // collect values of input fields -- email and password
-    if(isset($_SESSION['email'])){
-        echo 'you are already logged in.';
-    } else {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        
-        //get customer id
-        $sql = 'select cust_id from customer where email=' . $email . ' and password=' . $password . ';'; 
-        $result = mysqli_query($dbc, $sql);
-        $id = mysqli_fetch_array($result)['cust_id'];
-    }
+    // collect values of input fields -- email and password then verify and set session to logged in (use cust_id)
 }
 ?>
 

@@ -2,8 +2,8 @@ function toggleCategories(){
     $('#categoriesMenu').slideToggle();
 }
 
-function addToCart(){
-    
+function back(){
+    window.history.back();
 }
 
 function validateSignup(){

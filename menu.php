@@ -1,7 +1,16 @@
 <div id='navbar' class='navbar navbar-dark'>
     <div id='navHome'><a href='main.php'>Home</a></div>
     <div id='categories'><a href='#' onclick='toggleCategories();'>Categories</a></div>
-    <div id='navCart'><a href='cart.php'>My Cart</a></div>
+    <?php
+    //show cart when logged in as user, add product when logged in as admin
+    if(isset($_SESSION['admin']) == 1){
+        echo "<div id='navCart'><a href='addProduct.php'>Add Product</a></div>";
+    } else {
+        echo "<div id='navCart'><a href='cart.php'>My Cart</a></div>";
+
+    }
+
+    ?>
     <div id='loggedInText'>
 
     <?php 
@@ -15,7 +24,7 @@
     </div>
 </div>
 <div id='categoriesMenu' style='display: none;'>
-    <div><a href="?">All Items</a></div>
+    <div><a href="main.php">All Items</a></div>
     <?php
         include ('connection.php');
         $sql = 'select name from category;'; 

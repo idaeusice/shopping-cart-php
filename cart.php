@@ -56,5 +56,5 @@
     }
 ?>
 
-<a href='main.php'>Back</a>
+<a href='#' onclick='back()'>Back</a>
 </div>

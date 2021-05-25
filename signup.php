@@ -6,17 +6,10 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // collect value of input field
-        $username = $_POST['username'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
-        if (empty($username)) {
-          echo "Name is empty";
-          if (empty($password)) {
-              echo "Password is empty";
-          }
-        } else {
-          $_SESSION['username'] = $username;
-          $_SESSION['password'] = $password;
-        }
+        
+        
     }
 
 ?>
