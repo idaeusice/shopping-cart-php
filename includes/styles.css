@@ -12,7 +12,7 @@ content {
     background-image: url("./resources/images/bg.jpg");
     background-size: cover;
     top: 0;
-    position: absolute;
+    position: relative;
 }
 
 h1 {
@@ -62,6 +62,19 @@ h1 {
     text-decoration: none;
 }
 
+#categoriesMenu {
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 10;
+    background-color: white;
+    border-bottom: 3px solid orange;
+}
+
+#categoriesMenu div {
+    text-align: center;
+}
+
 #loggedIn a {
     color: white;
     text-decoration: none;
@@ -81,8 +94,8 @@ h1 {
 }
 
 #products {
-    margin-top: 120px;
     position: relative;
+    clear:both;
     padding: 5%;
 }
 
