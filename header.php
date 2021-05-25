@@ -17,6 +17,9 @@
 
     </head>
     <body>
+        <?php
+            session_start();
+        ?>
         <div id='title'>
         <h1><a href="main.php"><span style='color: orange;'>Dain</span>tree</a></h1>
         </div>

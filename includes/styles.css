@@ -92,6 +92,12 @@ h1 {
     width: 100%;
 }
 
+.cartRow {
+    max-height: 220px;
+    display: block;
+    width: 100%;
+}
+
 .prodImage{
     width: 75%;
     margin: auto;

@@ -2,15 +2,15 @@
     <div id='navHome'><a href='main.php'>Home</a></div>
     <div id='categories'><a href='#'>Categories</a></div>
     <div id='navCart'><a href='cart.php'>My Cart</a></div>
-    <div id='loggedInText'><a href='loginForm.php'>
+    <div id='loggedInText'>
 
         <?php 
-            if(isset($_SESSION['username'])){
-                echo 'Log Out';
+            if(isset($_SESSION['email'])){
+                echo "<a href='logout.php'>Log Out</a>";
             } else {
-                echo 'Log In';
+                echo "<a href='login.php'>Log In</a>";
             }
         ?>
     
-    </a></div>
+    </div>
 </div>
