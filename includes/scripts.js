@@ -24,7 +24,7 @@ function logout() {
 }
 
 function addToCart(){
-
+    
 }
 
 function validateSignup(){
@@ -46,12 +46,27 @@ function validateSignup(){
 }
 
 function validateLogin(){
-    var email = document.forms['login']['email'].value;
+    var validity = 0;
+    var emailValue = document.forms['login']['email'].value;
     var password = document.forms['login']['password'].value;
+	var emailPat = /[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.+([a-zA-Z]){2,4}\.?([a-zA-Z])?/;
+    var passwordPat = /[a-zA-Z]{8,}/;
 
-    if(email != '' || password != ''){
-        return true;
+	if(emailValue.match(emailPat)){
+		validity++;
+	} else {
+		alert('Please enter a valid email address.');
+		return false;
+	}
+
+    if(password.match(passwordPat)){
+		validity++;
     } else {
-        return false;
+        alert('Password must be at least 8 characters.');
+		return false;
+    }
+
+    if(validity === 2){
+        window.location = 'main.php';
     }
 }
