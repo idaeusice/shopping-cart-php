@@ -1,8 +1,4 @@
-function openCategories(){
-    $('#categoriesMenu').slideToggle();
-}
-
-function closeCategories(){
+function toggleCategories(){
     $('#categoriesMenu').slideToggle();
 }
 

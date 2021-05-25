@@ -6,7 +6,7 @@
     //categories when a post is made to products -- this will happen from the categories links. 
     if($_SERVER['QUERY_STRING'] != ''){
         include ('connection.php');
-        $sql = "select * from product p join
+        $sql = "select p.image, p.name, p.price, p.units from product p join
         category c on p.catagory_id = c.catagory_id
         where c.name like '" . $_SERVER['QUERY_STRING'] . "';"; 
         $result = mysqli_query($dbc, $sql);

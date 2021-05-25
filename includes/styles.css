@@ -100,6 +100,8 @@ h1 {
 }
 
 .row {
+    padding-top: 5px;
+    padding-bottom: 5px;
     max-height: 400px;
     display: block;
     width: 100%;
