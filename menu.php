@@ -24,18 +24,18 @@
     </div>
 </div>
 <div id='categoriesMenu' style='display: none;'>
-    <div><a href="main.php">All Items</a></div>
+    <a href="main.php"><div>All Items</div></a>
     <?php
         include ('connection.php');
         $sql = 'select name from category;'; 
         $result = mysqli_query($dbc, $sql);
     
         while($row = mysqli_fetch_array($result)){
-            echo '<div><a href="?';
+            echo '<a href="?';
             print $row['name'];
-            echo '">';
+            echo '"><div>';
             print $row['name'];
-            echo '</a></div>';
+            echo '</div></a>';
         }
     ?>
 </div>

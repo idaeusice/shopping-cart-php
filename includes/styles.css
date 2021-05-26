@@ -69,15 +69,31 @@ h1 {
     position: relative;
     z-index: 10;
     background-color: white;
-    border-bottom: 3px solid orange;
+    border-left: 3px solid #003366;
+    border-right: 3px solid #003366;
+    border-bottom: 3px solid #003366;
     width: 25%;
 }
 
 #categoriesMenu div {
     text-align: center;
     border-bottom: 1px solid lightgray;
+    cursor: pointer;
 }
 
+#categoriesMenu div {
+    text-decoration: none;
+    color: black;
+}
+
+#categoriesMenu div:hover {
+    background-color: orange;
+    color: white;
+}
+
+#categoriesMenu a {
+    text-decoration: none;
+}
 #loggedIn a {
     color: white;
     text-decoration: none;
@@ -99,7 +115,7 @@ h1 {
 #products {
     position: relative;
     clear:both;
-    padding: 5%;
+    margin: 5%;
 }
 
 .row {
@@ -119,6 +135,10 @@ h1 {
 .prodImage{
     width: 75%;
     margin: auto;
+}
+
+#addProduct {
+    margin-top: 200px;
 }
 
 /* footer -- copyright info, contact details, legalese, etc. */
