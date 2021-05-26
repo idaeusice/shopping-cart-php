@@ -5,7 +5,7 @@
     print "</div>";
 ?>
 
-<div id='cart' style='margin-top:120px;'>
+<div class='container' id='cart' style='margin-top:120px; text-align: center;'>
 
 <?php
     include ('connection.php');

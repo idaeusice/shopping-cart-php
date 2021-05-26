@@ -31,7 +31,7 @@
         $result = mysqli_query($dbc, $sql);
     
         while($row = mysqli_fetch_array($result)){
-            echo '<a href="?';
+            echo '<a href="main.php?';
             print $row['name'];
             echo '"><div>';
             print $row['name'];

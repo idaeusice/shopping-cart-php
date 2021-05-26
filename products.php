@@ -33,7 +33,9 @@
         <div class='col-sm border-right' style='margin:auto;'>
             <h3>";
                 print $row['name'];
-                echo"</h3>
+            echo "</h3><h6>";
+                print $row['description'];
+            echo "</h6>
         </div>
         <div class='col-sm' style='margin:auto;'>
             <div class='row container'>

@@ -4,11 +4,6 @@
         include ('menu.php');
     print "</div>";
     //need to perform a check 
-    /*to determine if the user is an admin.
-    if($_SESSION['admin'] == 1){
-        
-    }
-    */
     if($_SERVER['QUERY_STRING'] == 'upload'){
         include ('connection.php');
 
@@ -17,14 +12,15 @@
         $uploadOk = 1;
         $filetype = strtolower(pathinfo($file,PATHINFO_EXTENSION));
 
-        $sql = "insert into table "; 
+        $sql = "insert into product
+        (catagory_id, name, price, units, description) 
+        VALUES ((select catagory_id from category where category), '1', 'Shmapple', '300', '50', 'A real cellphone');"; 
         $result = mysqli_query($dbc, $sql);
-    }
 
-    
+    }
 ?>
 
-<div class='container' id='addProduct'>
+<div id='addProduct'>
     <form class="form-signin" action="?upload" method="post" enctype="multipart/form-data" id='productForm'>
         <table style='margin: auto;'>    
             <tr>
