@@ -4,11 +4,13 @@
 
 -- This file inserts the real data into the database
 
+
 -- All of the starter customer data
 INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`, `admin`) VALUES ('admin@daintree.com', 'Admin', 'Account', 'Admin1234', '1');
 INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('gacracco@gmail.com', 'Gino', 'Cracco', 'Gino1234');
 INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('ssonvisen@gmail.com', 'Steven', 'Sonvisen', 'Steven1234');
 INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('jcarder@gmail.com', 'Jeremy', 'Carder', 'Jeremy1234');
+
 
 -- All of the starter category data
 INSERT INTO `daintree_db`.`category` (`name`) VALUES ('Cellphones');
@@ -22,6 +24,7 @@ INSERT INTO `daintree_db`.`category` (`name`) VALUES ('Appliances');
 INSERT INTO `daintree_db`.`category` (`name`) VALUES ('Cameras');
 INSERT INTO `daintree_db`.`category` (`name`) VALUES ('Lights');
 INSERT INTO `daintree_db`.`category` (`name`) VALUES ('Outdoor Devices');
+
 
 -- All of the starter product data
 INSERT INTO `daintree_db`.`product` (`catagory_id`, `name`, `price`, `units`, `description`, `image`) VALUES ('1', 'jPhone 12', '699.99', '200', 'The newest jPhone model made by Pear.', 'includes/resources/images/jPhone12.png');
@@ -68,3 +71,35 @@ INSERT INTO `daintree_db`.`product` (`catagory_id`, `name`, `price`, `units`, `d
 INSERT INTO `daintree_db`.`product` (`catagory_id`, `name`, `price`, `units`, `description`, `image`) VALUES ('11', 'Zap Master', '64.99', '35', 'A bug zapper to stop bugs from bothering you.', 'includes/resources/images/ZapMaster.png');
 INSERT INTO `daintree_db`.`product` (`catagory_id`, `name`, `price`, `units`, `description`, `image`) VALUES ('11', 'Hikers\' Long Range Walkie Talkies', '19.99', '40', 'Walkie talkies by Hikers that can communicate from up to 4km away.', 'includes/resources/images/HikersWT.png');
 INSERT INTO `daintree_db`.`product` (`catagory_id`, `name`, `price`, `units`, `description`, `image`) VALUES ('11', 'QuickStart Electric Firestarter', '29.99', '44', 'A battery powered firestarter by QuickStart.', 'includes/resources/images/QuickStartEF.png');
+
+
+-- All of the starter order history data
+INSERT INTO `daintree_db`.`order_history` (`cust_id`, `date`) VALUES ('2', '2021-02-25'); -- Gino
+INSERT INTO `daintree_db`.`order_history` (`cust_id`, `date`) VALUES ('3', '2021-03-16'); -- Steven
+INSERT INTO `daintree_db`.`order_history` (`cust_id`, `date`) VALUES ('2', '2021-03-20'); -- Gino
+INSERT INTO `daintree_db`.`order_history` (`cust_id`, `date`) VALUES ('4', '2021-03-21'); -- Jeremy
+INSERT INTO `daintree_db`.`order_history` (`cust_id`, `date`) VALUES ('3', '2021-04-01'); -- Steven
+INSERT INTO `daintree_db`.`order_history` (`cust_id`, `date`) VALUES ('4', '2021-04-11'); -- Jeremy
+
+
+-- All of the starter order detail data
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('1', '2', '1', '499.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('2', '25', '1', '124.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('2', '26', '1', '249.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('3', '19', '1', '1999.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('3', '15', '1', '99.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('3', '18', '1', '99.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('4', '31', '2', '19.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('4', '34', '1', '29.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('5', '24', '2', '49.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('6', '33', '3', '19.99');
+INSERT INTO `daintree_db`.`order_detail` (`order_id`, `prod_id`, `amount`, `price`) VALUES ('6', '32', '2', '64.99');
+
+
+-- All of the starter cart data
+INSERT INTO `daintree_db`.`cart` (`cust_id`, `prod_id`, `quantity`) VALUES ('2', '6', '1');
+INSERT INTO `daintree_db`.`cart` (`cust_id`, `prod_id`, `quantity`) VALUES ('2', '9', '1');
+INSERT INTO `daintree_db`.`cart` (`cust_id`, `prod_id`, `quantity`) VALUES ('3', '20', '1');
+INSERT INTO `daintree_db`.`cart` (`cust_id`, `prod_id`, `quantity`) VALUES ('3', '13', '1');
+INSERT INTO `daintree_db`.`cart` (`cust_id`, `prod_id`, `quantity`) VALUES ('4', '27', '2');
+INSERT INTO `daintree_db`.`cart` (`cust_id`, `prod_id`, `quantity`) VALUES ('4', '22', '1');
