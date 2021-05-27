@@ -10,7 +10,6 @@
     $productStock;
     $productDescription;
     $file;
-    $uploadOk = 0;
 
     if($_SERVER['QUERY_STRING'] == 'upload'){
         //file upload handling. File needs to be uploaded 
@@ -18,7 +17,7 @@
         $directory = 'includes/resources/images/';
         $file = $directory . basename($_FILES["productImage"]["name"]);
         echo '<div style="margin-top: 100px;">' . $file . '</div>';
-        $uploadOk = 0;
+        $uploadOk = 1;
         $filetype = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 
         if($uploadOk === 1){
@@ -85,7 +84,19 @@ if($_SERVER['QUERY_STRING'] == 'upload'){
     </tr>
     <tr>
         <td>Product Category: </td>
-        <td><input type="text" name="productCategory"></td>
+        <td>
+            <select style="width: 100%;" id="productCategory" name="productCategory">';
+                include ('connection.php');
+                $sql = 'select name from category;'; 
+                $result = mysqli_query($dbc, $sql);
+            
+                while($row = mysqli_fetch_array($result)){
+                    echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+                }
+                
+                echo '
+            </select>
+        </td>
     </tr>
     <tr>
         <td>Product Description: </td>
