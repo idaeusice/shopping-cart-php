@@ -1,6 +1,5 @@
 <!-- can be callable or display the data directly on the page -->
 <?php
-
     $sql;
     $result;
     //categories when a post is made to products -- this will happen from the categories links. 
@@ -10,13 +9,45 @@
         category c on p.catagory_id = c.catagory_id
         where c.name like '" . $_SERVER['QUERY_STRING'] . "';"; 
         $result = mysqli_query($dbc, $sql);
-        
     }//end if (shows only query string specified products)
     else{
         include ('connection.php');
-        $sql = 'select * from product;'; 
-        $result = mysqli_query($dbc, $sql);
     }//end else (shows all products)
+?>
+
+<!-- Carousel to be added using this formatting with re-sizing. 
+    <div id="carouselContainer" style="position: relative; max-height: 400px;"> 
+        <div id="newProductsCarousel" class="carousel slide" data-ride="carousel" style="position: relative; height: 400px">
+        <div class="carousel-inner">
+            <?php
+            /*
+            $sql = 'select image from product limit 3;'; 
+            $result = mysqli_query($dbc, $sql);
+            while($row = mysqli_fetch_array($result)){
+                echo '
+                <div class="carousel-item active">
+                    <img class="d-block w-100 img-fluid" src="' . $row['image'] . '" alt="Newest Products">
+                </div>
+                ';
+            }
+            */
+            ?>
+        </div>
+
+        <a class="carousel-control-prev" href="#newProductsCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#newProductsCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        </div>
+-->
+    <?php
+    $sql = 'select * from product;'; 
+    $result = mysqli_query($dbc, $sql);
     while($row = mysqli_fetch_array($result)){
         echo "<div class='row border-bottom'>
         <div class='col-sm border-right'>
@@ -53,3 +84,4 @@
         </div>";
     }
 ?>
+

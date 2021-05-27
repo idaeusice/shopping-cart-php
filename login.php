@@ -4,10 +4,17 @@ print "<div id='header'>";
     include ('menu.php');
 print "</div>";
   
-include ('connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // collect values of input fields -- email and password then verify and set session to logged in (use cust_id)
+    // collect values of input fields -- email and password then verify and set session to logged in (use cust_id and admin)
+    include ('connection.php');
+    if($_POST['email'] == 'exists in table'){
+        
+        //and
+        if($_POST['password'] == 'password for the email'){
+            //login, set session.
+        }
+    };
 }
 ?>
 
