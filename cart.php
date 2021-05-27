@@ -5,10 +5,11 @@
     print "</div>";
 ?>
 
-<div id='cart' style='margin-top:120px;'>
+<div class='container' id='cart' style='margin-top:120px; text-align: center;'>
 
 <?php
     include ('connection.php');
+
     if(isset($_SESSION['id'])){
         $sql = 'select sum(price) total, image, name, price, c.quantity from cart c join product p
             on c.prod_id=p.prod_id
