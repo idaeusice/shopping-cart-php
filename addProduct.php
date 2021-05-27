@@ -16,17 +16,19 @@
         //before the rest of the form is submitted.
         $directory = 'includes/resources/images/';
         $file = $directory . basename($_FILES["productImage"]["name"]);
-        echo '<div style="margin-top: 100px;">' . $file . '</div>';
         $uploadOk = 1;
         $filetype = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 
-        if($uploadOk === 1){
-            if (move_uploaded_file($_FILES["productImage"]["tmp_name"], $file)) {
-                echo "<div>" . htmlspecialchars( basename( $_FILES["productImage"]["name"])) . "</div>";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
+        echo "<div id='imageSample' style='margin: auto; margin-top: 50px; text-align:center;'>";
+        if(move_uploaded_file($_FILES["productImage"]["tmp_name"], $file)){
+            echo "
+            <img class='image' src='" . $file . "' style='max-height: 300px;'>
+            ";
+        } else {
+            echo  "<img class='image' src='includes/resources/images/noimgplaceholder.png' style='max-height: 300px;'>";
+            echo "<p>No file was attached. The default image will be used.</p>";
         }
+        echo "</div>";
     }
 
     if($_SERVER['QUERY_STRING'] == 'submit'){
@@ -57,8 +59,10 @@ VALUES (
     '" . $productName . "', 
     '" . $productStock . "', 
     '" . $productPrice . "', 
-    '" . $productDescription . "', 
-    '" . $file . "');";
+    '" . $productDescription . "',
+    '" . $file  . "'
+    );
+    ";
             $result = mysqli_query($dbc, $sql);
         }
     }
