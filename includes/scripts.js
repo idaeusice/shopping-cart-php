@@ -82,3 +82,17 @@ function validateLogin(){
         window.location = 'main.php';
     }
 }
+
+// scroll button stuff
+// When the user scrolls down 20px from the top of the document, show the button
+window.onload = function() {window.onscroll = function() {scrollFunction()}};
+// ^^^ had to use onload otherwise it wasn't working
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        $("#scrollButton").fadeIn();
+    } else {
+        $("#scrollButton").fadeOut();
+    }
+}
+
