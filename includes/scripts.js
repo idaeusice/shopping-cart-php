@@ -1,4 +1,3 @@
-window.onload = function() { // had to wrap scroll stuff in window.onload otherwise it wouldn't work, just wrapped everything in case the other functions wouldn't work
 
     function toggleCategories(){
         $('#categoriesMenu').slideToggle();
@@ -84,6 +83,8 @@ window.onload = function() { // had to wrap scroll stuff in window.onload otherw
             window.location = 'main.php';
         }
     }
+
+window.onload = function() { // had to wrap scroll stuff in window.onload otherwise it wouldn't work
 
     window.onscroll = function() {
         // for sticky navbar
