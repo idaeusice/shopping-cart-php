@@ -6,6 +6,10 @@ function back(){
     window.history.back();
 }
 
+function addToCart(id){
+    
+}
+
 function validateSignup(){
     var email = document.forms['login']['email'].value,
         firstName = document.forms['login']['firstName'].value,
