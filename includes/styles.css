@@ -95,6 +95,11 @@ h1 {
 #categoriesMenu a {
     text-decoration: none;
 }
+
+.material-icons {
+    vertical-align: middle;
+}
+
 #loggedIn a {
     color: white;
     text-decoration: none;

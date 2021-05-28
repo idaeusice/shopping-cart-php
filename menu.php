@@ -1,20 +1,20 @@
 <div id='navbar' class='navbar navbar-dark'>
-    <div id='navHome'><a href='main.php'>Home</a></div>
+    <div id='navHome'><a href='main.php'><span class='material-icons'>home</span>Home</a></div>
     <a><div id='categories' onclick='toggleCategories();' style='cursor: pointer;'>Categories</div></a>
     <?php
         //show cart when logged in as user, add product when logged in as admin
         if(isset($_SESSION['admin']) == 1){
             echo "<div id='navCart'><a href='addProduct.php'>Add Product</a></div>";
         } else {
-            echo "<div id='navCart'><a href='cart.php'>My Cart</a></div>";
+            echo "<div id='navCart'><a href='cart.php'><span class='material-icons'>add_shopping_cart</span>My Cart</a></div>";
         }
     ?>
     <div id='loggedInText'>
     <?php 
         if(isset($_SESSION['email'])){
-            echo "<a href='logout.php'>Log Out</a>";
+            echo "<a href='logout.php'><span class='material-icons'>logout</span>Log Out</a>";
         } else {
-            echo "<a href='login.php'>Log In</a>";
+            echo "<a href='login.php'><span class='material-icons'>login</span>Log In</a>";
         }
     ?>
     </div>
