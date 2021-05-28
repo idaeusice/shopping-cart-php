@@ -17,6 +17,7 @@
 
     </head>
     <body>
+        <div id='header'>
         <?php
             session_start();
         ?>

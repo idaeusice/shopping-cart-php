@@ -1,8 +1,6 @@
 <?php
-    print "<div id='header'>";
-        include ('header.php');//title
-        include ('menu.php');
-    print "</div>";
+    include ('header.php');//title
+    include ('menu.php');
 ?>
 
 <div id='main'>
