@@ -9,7 +9,7 @@
     $productStock;
     $productStock;
     $productDescription;
-    $file;
+    $file = 'includes/resources/images/notfound.jpg';
 
     if($_SERVER['QUERY_STRING'] == 'upload'){
         //file upload handling. File needs to be uploaded 
@@ -66,11 +66,9 @@ VALUES (
             $result = mysqli_query($dbc, $sql);
         }
     }
-?>
 
-<div id='addProduct'>
+echo '<div id="addProduct">';
 
-<?php
 if($_SERVER['QUERY_STRING'] == 'upload'){
     echo '
 <form class="form-signin" action="?submit" method="post" enctype="multipart/form-data" id="productForm">
