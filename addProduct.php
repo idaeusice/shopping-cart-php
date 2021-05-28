@@ -3,19 +3,16 @@
         include ('header.php');
         include ('menu.php');
     print "</div>";
-    $productCategory;
-    $productName;
-    $productPrice;
-    $productStock;
-    $productStock;
-    $productDescription;
-    $file = 'includes/resources/images/notfound.jpg';
 
     if($_SERVER['QUERY_STRING'] == 'upload'){
         //file upload handling. File needs to be uploaded 
         //before the rest of the form is submitted.
         $directory = 'includes/resources/images/';
         $file = $directory . basename($_FILES["productImage"]["name"]);
+        if($file == 'includes/resources/images/'){
+            $file = 'includes/resources/images/notfound.jpg';
+        }
+        $_SESSION['file'] = basename($_FILES["productImage"]["name"]);
         $uploadOk = 1;
         $filetype = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 
@@ -33,6 +30,10 @@
 
     if($_SERVER['QUERY_STRING'] == 'submit'){
         //table variables that are set after the user uploads an image.
+        $file = 'includes/resources/images/' . $_SESSION['file'];
+        if($file == 'includes/resources/images/'){
+            $file = 'includes/resources/images/notfound.jpg';
+        } 
         $productCategory = $_POST['productCategory'];
         $productName = $_POST['productName'];
         $productPrice = $_POST['productPrice'];
