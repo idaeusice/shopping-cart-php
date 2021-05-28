@@ -2,6 +2,8 @@
 <?php
     $sql;
     $result;
+    // set category to "All Items" by default
+    $category = 'All Items';
     //categories when a post is made to products -- this will happen from the categories links. 
     if($_SERVER['QUERY_STRING'] != ''){
         include ('connection.php');
@@ -55,7 +57,10 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-*/
+*/  
+    // output current category
+    echo "<p><span style='font-weight: bold'>Filter by category:</span> $category</p>";
+    
     while($row = mysqli_fetch_array($result)){
         echo "
         <div class='row border-bottom'>
