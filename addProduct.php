@@ -83,7 +83,7 @@ if($_SERVER['QUERY_STRING'] == 'upload'){
     </tr>
     <tr>
         <td>Product Price: </td>
-        <td><input type="text" name="productPrice"></td>
+        <td><input type="number" name="productPrice"></td>
     </tr>
     <tr>
         <td>Product Category: </td>
@@ -107,7 +107,7 @@ if($_SERVER['QUERY_STRING'] == 'upload'){
     </tr>
     <tr>
         <td>Product Stock: </td>
-        <td><input type="text" name="productStock"></td>
+        <td><input type="number" name="productStock"></td>
     </tr>
     <tr>
         <td colspan=2 style="text-align:center;"><input type="submit" value="Add Product" name="submit"></td>
