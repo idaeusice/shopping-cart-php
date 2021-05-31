@@ -4,17 +4,38 @@ print "<div id='header'>";
     include ('menu.php');
 print "</div>";
   
-
+// if submitted with POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect values of input fields -- email and password then verify and set session to logged in (use cust_id and admin)
     include ('connection.php');
-    if($_POST['email'] == 'exists in table'){
-        
-        //and
-        if($_POST['password'] == 'password for the email'){
-            //login, set session.
-        }
-    };
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * 
+            FROM customer 
+            WHERE email = '$email' AND 
+                  password = '$password'";
+
+
+    $result = mysqli_query($dbc, $sql);
+
+    // fetch first row
+    $row = mysqli_fetch_array($result);
+
+    // if SQL returns a match set session variables (user is logged in)
+    if (is_array($row)) {
+        $_SESSION['cust_id'] = $row['cust_id'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['first_name'] = $row['first_name'];
+        $_SESSION['last_name'] = $row['last_name'];
+        $_SESSION['password'] = $row['password'];
+        $_SESSION['admin'] = $row['admin'];
+
+        header("Location: main.php");
+    } else {
+        echo "<script>alert('incorrect login credentials')</script>";
+    }
 }
 ?>
 

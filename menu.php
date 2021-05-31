@@ -3,15 +3,16 @@
     <a><div id='categories' onclick='toggleCategories();' style='cursor: pointer;'>Categories</div></a>
     <?php
         //show cart when logged in as user, add product when logged in as admin
-        if(isset($_SESSION['admin']) == 1){
-            echo "<div id='navCart'><a href='addProduct.php'>Add Product</a></div>";
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+            echo "<div id='navCart'><a href='addProduct.php'><span class='material-icons'>add</span>Add Product</a></div>";
         } else {
             echo "<div id='navCart'><a href='cart.php'><span class='material-icons'>add_shopping_cart</span>My Cart</a></div>";
         }
     ?>
     <div id='loggedInText'>
     <?php 
-        if(isset($_SESSION['email'])){
+        // show logout when logged in and login when logged out
+        if(isset($_SESSION['cust_id'])) {
             echo "<a href='logout.php'><span class='material-icons'>logout</span>Log Out</a>";
         } else {
             echo "<a href='login.php'><span class='material-icons'>login</span>Log In</a>";
