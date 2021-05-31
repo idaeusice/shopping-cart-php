@@ -59,7 +59,11 @@
     </div>
 */  
     // output current category
-    echo "<p><span style='font-weight: bold'>Filter by category:</span> $category</p>";
+    echo "<p style='float: left'><span style='font-weight: bold'>Filter by category:</span> $category</p>";
+
+    // if logged in show welcome message
+    if (isset($_SESSION['first_name']))
+        echo "<p style='float: right'><span style='font-weight: bold'>Welcome, </span>" . $_SESSION['first_name'] . "!</p>";
     
     while($row = mysqli_fetch_array($result)){
         echo "
