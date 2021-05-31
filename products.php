@@ -28,40 +28,62 @@
     }//end if (shows only query string specified products)
     else{
         include ('connection.php');
-        $sql = 'select * from product;'; 
-        $result = mysqli_query($dbc, $sql);
+        echo '
+        <div id="carouselControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" style="height: 500px;">
+                <div class="carousel-item active">
+                    <div id="carouselText">
+                        <h1>New to Daintree</h1>
+                        <p>This is also why we’re allowing players to rent their own servers and create 
+                        their own private worlds with their own rules. Another great update for MMO fans, 
+                        this time bringing mounted combat to Lord of the Rings Online.</p>
+                    </div>
+                    <img class="w-100" src="includes/resources/images/electronics.jpg" alt="First slide">
+                </div>';
+                $bgImageCount = 0;
+                $carouselSql = 'select image from product order by prod_id limit 2';
+                $carouselResults = mysqli_query($dbc, $carouselSql);
+                while($row = mysqli_fetch_array($carouselResults)){
+                    $bgImageCount++;
+                    /*
+                    if($row['featured'] == 1){
+                        show featured sections.
+                    }
+                    */
+                    echo '        
+                    <div class="carousel-item">
+                        <div id="carouselText">
+                            <h1>Featured</h1>
+                            <p>The last beta weekend event is gone and, as mentioned above, 
+                            we still need to wait for one more month. DDO solved the problem by making casters 
+                            ludicrously more powerful than melee, and seemingly giving every boss a massive unavoidable 
+                            AoE knockdown in order to punish anyone daring to get into melee range. </p>
+                        </div>
+                        <img class="w-100" src="includes/resources/images/electronics.jpg" alt="First slide">
+                    </div>';
+                }
+            echo'       
+            </div>
+            <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        ';
+
+        $prodSql = 'select * from product;'; 
+        $prodResult = mysqli_query($dbc, $prodSql);
+
     }//end else (shows all products)
 
-/* Carousel to be added using this formatting with re-sizing. 
-    <div id="carouselContainer" style="position: relative; max-height: 400px;"> 
-        <div id="newProductsCarousel" class="carousel slide" data-ride="carousel" style="position: relative; height: 400px">
-        <div class="carousel-inner">
-            $sql = 'select image from product order by prod_id desc limit 3;'; 
-            $result = mysqli_query($dbc, $sql);
-            while($row = mysqli_fetch_array($result)){
-                echo '
-                <div class="carousel-item active">
-                    <img class="d-block w-100 img-fluid" src="' . $row['image'] . '" alt="Newest Products">
-                </div>
-                ';
-            }
-        </div>
-
-        <a class="carousel-control-prev" href="#newProductsCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-
-        <a class="carousel-control-next" href="#newProductsCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-*/  
     // output current category
     echo "<p><span style='font-weight: bold'>Filter by category:</span> $category</p>";
     
-    while($row = mysqli_fetch_array($result)){
+    while($row = mysqli_fetch_array($prodResult)){
         echo "
         <div class='row border-bottom'>
         <div class='col-sm border-right'>
@@ -93,7 +115,12 @@
                     <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' onclick='addToCart(" . $row['prod_id'] . ");'>
                         <strong>Add to Cart</strong><br>
                         <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
-                    </button>
+                    </button>";
+                    
+                    if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+                        echo "<button class='btn btn-danger' id='feature" . $row['prod_id'] . "' onclick='feature('feature" . $row['prod_id'] . "')'>Feature</button>";
+                    }
+                    echo"
                     </div>
                 </div>
             </div>

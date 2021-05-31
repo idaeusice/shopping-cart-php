@@ -30,10 +30,14 @@
 
     if($_SERVER['QUERY_STRING'] == 'submit'){
         //table variables that are set after the user uploads an image.
+        include ('connection.php');
+
         $file = 'includes/resources/images/' . $_SESSION['file'];
+        $uploadOk = 0;
         if($file == 'includes/resources/images/'){
             $file = 'includes/resources/images/notfound.jpg';
         } 
+
         $productCategory = $_POST['productCategory'];
         $productName = $_POST['productName'];
         $productPrice = $_POST['productPrice'];
@@ -41,9 +45,16 @@
         $productStock = $_POST['productStock'];
         $productDescription = $_POST['productDescription'];
         
-        $uploadOk = 1;
+        $checkSql = "select name from product name where name=" . $productName . ";";
+        $checkResult = mysqli_query($dbc, $sql);
+        while($row = mysqli_fetch_array($checkResult)){
+            if($row == $productName){
+                $uploadOk = 1;
+            } else {
+                $uploadOk = 0;
+            }
+        }
         if($uploadOk === 1){
-            include ('connection.php');
     
             $sql = "
 insert into product(
