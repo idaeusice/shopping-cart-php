@@ -15,7 +15,7 @@
 ?>
 
 <!-- content if any -->
-<div id='signupContainer' style='margin-top: 200px; height: auto;'>
+<div id='signupContainer'>
     <div id='signupForm' style='position: relative; display: block; margin: auto;'>
         <form class='form-signin' method='post' action='signup.php' onsubmit='validateLogin();' id='signup'>
             <table style='margin: auto;'>
