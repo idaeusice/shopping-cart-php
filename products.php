@@ -40,7 +40,7 @@
                 <div class='row border-bottom'>
                 <div class='col-sm border-right'>
                     <div class='prodImage'>
-                        <img class='img-fluid img-thumbnail' src='";
+                        <img class='image' src='";
                         if(is_null($row['image'])){
                             print 'includes\resources\images\noimgplaceholder.png';
                         } else {
@@ -100,26 +100,21 @@ else{
                 <img class="w-100" src="includes/resources/images/carousel1.jpg" alt="Main slide">
             </div>';
             $bgImageCount = 0;
-            $carouselSql = 'select image from product order by prod_id limit 2';
+            $carouselSql = 'select * from product';
             $carouselResults = mysqli_query($dbc, $carouselSql);
             while($row = mysqli_fetch_array($carouselResults)){
                 $bgImageCount++;
-                /*
                 if($row['feature'] == 1){
-                    show featured sections.
+                    echo '
+                    <div class="carousel-item">
+                        <div id="carouselText">
+                            <h1>' . $row['name'] . '</h1>
+                            <p> ' . $row['description'] . ' </p>
+                            <img class="w-50" src="' . $row['image'] . '">
+                        </div>
+                        <img class="w-100" src="includes/resources/images/carousel2.jpg" alt="Product slide">
+                    </div>';
                 }
-                */
-                echo '
-                <div class="carousel-item">
-                    <div id="carouselText">
-                        <h1>Featured</h1>
-                        <p>The last beta weekend event is gone and, as mentioned above,
-                        we still need to wait for one more month. DDO solved the problem by making casters
-                        ludicrously more powerful than melee, and seemingly giving every boss a massive unavoidable
-                        AoE knockdown in order to punish anyone daring to get into melee range. </p>
-                    </div>
-                    <img class="w-100" src="includes/resources/images/carousel2.jpg" alt="Product slide">
-                </div>';
             }
         echo'
         </div>
@@ -138,12 +133,12 @@ else{
         $allResult = mysqli_query($dbc, $allSql);
 
         while($row = mysqli_fetch_array($allResult)){
-            if($row['archive'] == 0 || $_SESSION['admin'] == 1) {
+            if($row['archive'] == 0) {
                 echo "
                 <div class='row border-bottom'>
                 <div class='col-sm border-right'>
                     <div class='prodImage'>
-                        <img class='img-fluid img-thumbnail' src='";
+                        <img class='image' src='";
                         if(is_null($row['image'])){
                             print 'includes\resources\images\noimgplaceholder.png';
                         } else {
