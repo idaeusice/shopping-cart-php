@@ -5,7 +5,7 @@
     //categories when a post is made to products -- this will happen from the categories links.
     if($_SERVER['QUERY_STRING'] != ''){
         include ('connection.php');
-        
+
         $category = str_replace('%20', ' ', $_SERVER['QUERY_STRING']);
         $sql = 'select * from products;';
 
@@ -35,7 +35,7 @@
             echo "<p style='float: right'><span style='font-weight: bold'>Welcome, </span>" . $_SESSION['first_name'] . "!</p>";
         
         while($row = mysqli_fetch_array($prodResult)){
-            if($row['archive']==0) {
+            if($row['archive'] == 0 || $_SESSION['admin'] == 1) {
                 echo "
                 <div class='row border-bottom'>
                 <div class='col-sm border-right'>
@@ -139,7 +139,7 @@ else{
         $allResult = mysqli_query($dbc, $allSql);
 
         while($row = mysqli_fetch_array($allResult)){
-            if($row['archive']==0) {
+            if($row['archive'] == 0 || $_SESSION['admin'] == 1) {
                 echo "
                 <div class='row border-bottom'>
                 <div class='col-sm border-right'>
