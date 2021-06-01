@@ -11,8 +11,9 @@
 
         //if there's nothing to show -- creating a unique resultset so the $result variable is unaffected:
         $results = mysqli_query($dbc, $sql);
-        /*
-        if(mysqli_fetch_array($results)[0] == ''){
+        $row = mysqli_fetch_array($result);
+
+        if (is_array($row)) {
             echo '
             <div class="container" style="text-align: center;">
                 <img src="includes/resources/images/notfound.jpg" style="max-height: 400px;">
@@ -20,7 +21,6 @@
             </div>
             ';
         }
-        */
 
         $prodSql = "select p.prod_id, p.image, p.name, p.price, p.units, p.description, p.archive, p.feature from product p join
         category c on p.catagory_id = c.catagory_id

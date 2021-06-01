@@ -7,9 +7,11 @@
         window.history.back();
     }
 
-    // function addToCart(){
-    //     if()
-    // }
+    function addToCart(){
+        if(true){
+            return true;
+        }
+    }
 
     function addProduct(){
         //category is not checked, because it will always be included.
