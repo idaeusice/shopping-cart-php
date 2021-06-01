@@ -8,7 +8,9 @@
     }
 
     function addToCart(){
-        if()
+        if(true){
+            return true;
+        }
     }
 
     function addProduct(){
