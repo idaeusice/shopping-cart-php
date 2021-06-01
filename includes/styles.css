@@ -168,8 +168,8 @@ h1 {
     margin-bottom: 18%;
 }
 
-.carousel-item {
-    text-align: center;
+.carousel-inner {
+    margin-bottom: 2em;
 }
 
 #carouselText{
