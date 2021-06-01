@@ -40,7 +40,7 @@
                 <div class='row border-bottom'>
                 <div class='col-sm border-right'>
                     <div class='prodImage'>
-                        <img class='img-fluid img-thumbnail' src='";
+                        <img class='image' src='";
                         if(is_null($row['image'])){
                             print 'includes\resources\images\noimgplaceholder.png';
                         } else {
@@ -134,12 +134,12 @@ else{
         $allResult = mysqli_query($dbc, $allSql);
 
         while($row = mysqli_fetch_array($allResult)){
-            if($row['archive'] == 0 || $_SESSION['admin'] == 1) {
+            if($row['archive'] == 0) {
                 echo "
                 <div class='row border-bottom'>
                 <div class='col-sm border-right'>
                     <div class='prodImage'>
-                        <img class='img-fluid img-thumbnail' src='";
+                        <img class='image' src='";
                         if(is_null($row['image'])){
                             print 'includes\resources\images\noimgplaceholder.png';
                         } else {

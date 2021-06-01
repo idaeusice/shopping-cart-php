@@ -140,15 +140,27 @@ h1 {
     width: 100%;
 }
 
+/* cart styling */
 .cartRow {
     max-height: 220px;
     display: block;
     width: 100%;
 }
 
-.prodImage{
-    width: 75%;
+/* image styles for the products page */
+.prodImage {
+    height: 100%;
+    border: 1px solid lightgray;
+    border-radius: 2px;
     margin: auto;
+}
+
+.image {
+    text-align: center;
+    max-height: 200px;
+    max-width: 200px;
+    margin: auto;
+    display: block;
 }
 
 #addProduct {
