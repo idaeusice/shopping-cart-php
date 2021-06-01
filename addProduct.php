@@ -30,52 +30,105 @@
             echo "</div>";
         }
 
-        if($_SERVER['QUERY_STRING'] == 'submit'){
-            //table variables that are set after the user uploads an image.
-            $file = 'includes/resources/images/' . $_SESSION['file'];
-            if($file == 'includes/resources/images/'){
-                $file = 'includes/resources/images/notfound.jpg';
-            } 
-            $productCategory = $_POST['productCategory'];
-            $productName = $_POST['productName'];
-            $productPrice = $_POST['productPrice'];
-            $productStock = $_POST['productStock'];
-            $productStock = $_POST['productStock'];
-            $productDescription = $_POST['productDescription'];
-            
-            $uploadOk = 1;
-            if($uploadOk === 1){
-                include ('connection.php');
+    if($_SERVER['QUERY_STRING'] == 'submit'){
+        //table variables that are set after the user uploads an image.
+        include ('connection.php');
+
+        $file = 'includes/resources/images/' . $_SESSION['file'];
+        $uploadOk = 0;
+        if($file == 'includes/resources/images/'){
+            $file = 'includes/resources/images/notfound.jpg';
+        } 
+
+        $productCategory = $_POST['productCategory'];
+        $productName = $_POST['productName'];
+        $productPrice = $_POST['productPrice'];
+        $productStock = $_POST['productStock'];
+        $productStock = $_POST['productStock'];
+        $productDescription = $_POST['productDescription'];
         
-                $sql = "
-    insert into product(
-        prod_id,
-        catagory_id, 
-        name, 
-        price, 
-        units, 
-        description, 
-        image) 
-    VALUES (
-        (select max(prod_id) + 1 from product p),
-        (select catagory_id from category c where c.name like concat(upper(substring('" . $productCategory . "', 1, 1)),lower(substring('" . $productCategory . "', 2)))), 
-        '" . $productName . "', 
-        '" . $productStock . "', 
-        '" . $productPrice . "', 
-        '" . $productDescription . "',
-        '" . $file  . "'
-        );
-        ";
-                $result = mysqli_query($dbc, $sql);
+        $checkSql = "select name from product name where name=" . $productName . ";";
+        $checkResult = mysqli_query($dbc, $sql);
+        while($row = mysqli_fetch_array($checkResult)){
+            if($row == $productName){
+                $uploadOk = 1;
+            } else {
+                $uploadOk = 0;
             }
+        }
+        if($uploadOk === 1){
+    
+            $sql = "
+insert into product(
+    prod_id,
+    catagory_id, 
+    name, 
+    price, 
+    units, 
+    description, 
+    image) 
+VALUES (
+    (select max(prod_id) + 1 from product p),
+    (select catagory_id from category c where c.name like concat(upper(substring('" . $productCategory . "', 1, 1)),lower(substring('" . $productCategory . "', 2)))), 
+    '" . $productName . "', 
+    '" . $productStock . "', 
+    '" . $productPrice . "', 
+    '" . $productDescription . "',
+    '" . $file  . "'
+    );
+    ";
+            $result = mysqli_query($dbc, $sql);
         }
 
     echo '<div id="addProduct">';
 
-    if($_SERVER['QUERY_STRING'] == 'upload'){
-        echo '
-    <form class="form-signin" action="?submit" method="post" enctype="multipart/form-data" id="productForm">
-    <table style="margin: auto;">
+if($_SERVER['QUERY_STRING'] == 'upload'){
+    echo '
+<form class="form-signin" action="?submit" method="post" enctype="multipart/form-data" id="productForm" onsubmit="addProduct()">
+<table style="margin: auto;">
+    <tr>
+        <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
+    </tr>
+    <tr>
+        <td>Product Name: </td>
+        <td><input type="text" name="productName"></td>
+    </tr>
+    <tr>
+        <td>Product Price: </td>
+        <td><input type="number" name="productPrice"></td>
+    </tr>
+    <tr>
+        <td>Product Category: </td>
+        <td>
+            <select style="width: 100%;" id="productCategory" name="productCategory">';
+                include ('connection.php');
+                $sql = 'select name from category;'; 
+                $result = mysqli_query($dbc, $sql);
+            
+                while($row = mysqli_fetch_array($result)){
+                    echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+                }
+                
+                echo '
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Product Description: </td>
+        <td><input type="textarea" name="productDescription"></td>
+    </tr>
+    <tr>
+        <td>Product Stock: </td>
+        <td><input type="number" name="productStock"></td>
+    </tr>
+    <tr>
+        <td colspan=2 style="text-align:center;"><input type="submit" value="Add Product" name="submit"></td>
+    </tr>    
+    ';
+} else {
+    echo '
+<form class="form-signin" action="?upload" method="post" enctype="multipart/form-data" id="productForm">
+<table style="margin: auto;">
         <tr>
             <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
         </tr>

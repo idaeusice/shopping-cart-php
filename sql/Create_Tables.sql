@@ -27,10 +27,13 @@ CREATE TABLE IF NOT EXISTS `daintree_db`.`customer` (
   `last_name` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `admin` TINYINT(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`cust_id`))
+  PRIMARY KEY (`cust_id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) )
 ENGINE = InnoDB
+AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE customer AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
 -- Table `daintree_db`.`category`
@@ -38,10 +41,13 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `daintree_db`.`category` (
   `catagory_id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`catagory_id`))
+  PRIMARY KEY (`catagory_id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) )
 ENGINE = InnoDB
+AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE category AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
 -- Table `daintree_db`.`product`
@@ -54,16 +60,21 @@ CREATE TABLE IF NOT EXISTS `daintree_db`.`product` (
   `units` INT(11) NOT NULL,
   `description` VARCHAR(100) NULL DEFAULT NULL,
   `image` VARCHAR(45) NULL DEFAULT NULL,
+  `archive` TINYINT(1) NOT NULL DEFAULT 0,
+  `feature` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`prod_id`),
   INDEX `fk_Product_Category1_idx` (`catagory_id` ASC) ,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) ,
   CONSTRAINT `fk_Product_Category1`
     FOREIGN KEY (`catagory_id`)
     REFERENCES `daintree_db`.`category` (`catagory_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 42
 DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE product AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
 -- Table `daintree_db`.`cart`
@@ -104,8 +115,10 @@ CREATE TABLE IF NOT EXISTS `daintree_db`.`order_history` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE order_history AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
 -- Table `daintree_db`.`order_detail`

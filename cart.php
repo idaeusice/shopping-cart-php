@@ -53,9 +53,13 @@
         echo "<div id='emptyCart'>
         <h4>You are not logged in. Please log in to add items to your cart.</h4>
         <p>Start shopping <a href='main.php' style='text-decoration: none;'>here</a>
-        </div>";
+        </div><br><br><br>";
     }
 ?>
 
 <a href='#' onclick='back()'>Back</a>
 </div>
+
+<?php 
+    include ('footer.php');
+?>
