@@ -6,10 +6,11 @@
 
 
 -- All of the starter customer data
-INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`, `admin`) VALUES ('admin@daintree.com', 'Admin', 'Account', 'Admin1234', '1');
-INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('gacracco@gmail.com', 'Gino', 'Cracco', 'Gino1234');
-INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('ssonvisen@gmail.com', 'Steven', 'Sonvisen', 'Steven1234');
-INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('jcarder@gmail.com', 'Jeremy', 'Carder', 'Jeremy1234');
+INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`, `admin`) VALUES ('admin@daintree.com', 'Admin', 'Account', '$2y$10$xq4x3d4H.wUKn33h0VKwe.OaiX0a4bbB/TSe5KSLSqiDW4qZs3iOa
+', '1');
+INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('gacracco@gmail.com', 'Gino', 'Cracco', '$2y$10$L3MNtM4tc7.ezb9XV0QmZOWiZV24TpikFDJntvsH.TOvjVgRv/G5a');
+INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('ssonvisen@gmail.com', 'Steven', 'Sonvisen', '$2y$10$Lh59BtQZw5aziu6RZC0EMu8kbvBKwK6Obfvt7mQXXTVqjr0YgLwBW');
+INSERT INTO `daintree_db`.`customer` (`email`, `first_name`, `last_name`, `password`) VALUES ('jcarder@gmail.com', 'Jeremy', 'Carder', '$2y$10$VkcFuYIk/y9PcUT.fgUoTOcVf5REDnva3h0uYfUn4134hqN.Yf.fO');
 
 
 -- All of the starter category data

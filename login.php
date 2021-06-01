@@ -14,22 +14,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "SELECT * 
             FROM customer 
-            WHERE email = '$email' AND 
-                  password = '$password'";
-
+            WHERE email = '$email'";
 
     $result = mysqli_query($dbc, $sql);
 
     // fetch first row
     $row = mysqli_fetch_array($result);
 
-    // if SQL returns a match set session variables (user is logged in)
+    $hash = $row['password']; // store hashed password
+    //$hash = substr( $hash, 0, 60 ); // make sure hash is 60 chars, can use either this or the line below (below better)
+    $hash = trim($hash); // trim extra whitespace 
+
+    // if valid email test password
     if (is_array($row)) {
+        $passCorrect = password_verify($password, $hash); // check if password matches
+    } else
+        $passCorrect = 0; // invalid email, deny login
+
+    // if SQL returns a match set session variables (user is logged in)
+    if (isset($passCorrect) && $passCorrect == 1) {
         $_SESSION['cust_id'] = $row['cust_id'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['first_name'] = $row['first_name'];
         $_SESSION['last_name'] = $row['last_name'];
-        $_SESSION['password'] = $row['password'];
         $_SESSION['admin'] = $row['admin'];
 
         header("Location: main.php");
