@@ -83,7 +83,7 @@ echo '<div id="addProduct">';
 
 if($_SERVER['QUERY_STRING'] == 'upload'){
     echo '
-<form class="form-signin" action="?submit" method="post" enctype="multipart/form-data" id="productForm">
+<form class="form-signin" action="?submit" method="post" enctype="multipart/form-data" id="productForm" onsubmit="addProduct()">
 <table style="margin: auto;">
     <tr>
         <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
