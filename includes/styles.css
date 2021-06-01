@@ -156,6 +156,10 @@ h1 {
     margin-bottom: 18%;
 }
 
+.carousel-inner {
+    margin-bottom: 2em;
+}
+
 #carouselText{
     color: black;
     background-color: white;

@@ -82,6 +82,11 @@
     }//end if (shows only query string specified products)
 else{
     include ('connection.php');
+
+    // if logged in show welcome message
+    if (isset($_SESSION['first_name']))
+        echo "<p style='float: right'><span style='font-weight: bold'>Welcome, </span>" . $_SESSION['first_name'] . "!</p>";
+
     echo '
     <div id="carouselControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" style="height: 500px;">
@@ -128,12 +133,6 @@ else{
         </a>
     </div>';
 
-        // output current category
-        echo "<p style='float: left'><span style='font-weight: bold'>Filter by category:</span> $category</p>";
-
-        // if logged in show welcome message
-        if (isset($_SESSION['first_name']))
-            echo "<p style='float: right'><span style='font-weight: bold'>Welcome, </span>" . $_SESSION['first_name'] . "!</p>";
 
         $allSql = "select * from product;";
         $allResult = mysqli_query($dbc, $allSql);
