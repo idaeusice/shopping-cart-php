@@ -4,29 +4,31 @@
         include ('menu.php');
     print "</div>";
 
-    if($_SERVER['QUERY_STRING'] == 'upload'){
-        //file upload handling. File needs to be uploaded 
-        //before the rest of the form is submitted.
-        $directory = 'includes/resources/images/';
-        $file = $directory . basename($_FILES["productImage"]["name"]);
-        if($file == 'includes/resources/images/'){
-            $file = 'includes/resources/images/notfound.jpg';
-        }
-        $_SESSION['file'] = basename($_FILES["productImage"]["name"]);
-        $uploadOk = 1;
-        $filetype = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+    // check if logged in as admin
+    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+        if($_SERVER['QUERY_STRING'] == 'upload'){
+            //file upload handling. File needs to be uploaded 
+            //before the rest of the form is submitted.
+            $directory = 'includes/resources/images/';
+            $file = $directory . basename($_FILES["productImage"]["name"]);
+            if($file == 'includes/resources/images/'){
+                $file = 'includes/resources/images/notfound.jpg';
+            }
+            $_SESSION['file'] = basename($_FILES["productImage"]["name"]);
+            $uploadOk = 1;
+            $filetype = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 
-        echo "<div id='imageSample' style='margin: auto; margin-top: 50px; text-align:center;'>";
-        if(move_uploaded_file($_FILES["productImage"]["tmp_name"], $file)){
-            echo "
-            <img class='image' src='" . $file . "' style='max-height: 300px;'>
-            ";
-        } else {
-            echo  "<img class='image' src='includes/resources/images/noimgplaceholder.png' style='max-height: 300px;'>";
-            echo "<p>No file was attached. The default image will be used.</p>";
+            echo "<div id='imageSample' style='margin: auto; margin-top: 50px; text-align:center;'>";
+            if(move_uploaded_file($_FILES["productImage"]["tmp_name"], $file)){
+                echo "
+                <img class='image' src='" . $file . "' style='max-height: 300px;'>
+                ";
+            } else {
+                echo  "<img class='image' src='includes/resources/images/noimgplaceholder.png' style='max-height: 300px;'>";
+                echo "<p>No file was attached. The default image will be used.</p>";
+            }
+            echo "</div>";
         }
-        echo "</div>";
-    }
 
     if($_SERVER['QUERY_STRING'] == 'submit'){
         //table variables that are set after the user uploads an image.
@@ -77,9 +79,8 @@ VALUES (
     ";
             $result = mysqli_query($dbc, $sql);
         }
-    }
 
-echo '<div id="addProduct">';
+    echo '<div id="addProduct">';
 
 if($_SERVER['QUERY_STRING'] == 'upload'){
     echo '
@@ -132,19 +133,68 @@ if($_SERVER['QUERY_STRING'] == 'upload'){
             <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
         </tr>
         <tr>
-            <td rowspan=2 style="border-right: 2px solid #003366;"><h6>Select image to upload:</h6></td>
-            <td style="padding-left: 5px;">
-                <input type="file" name="productImage" id="productImage"><br><br>
-                <input type="submit" value="Attach File" name="submit">
-                </td>
+            <td>Product Name: </td>
+            <td><input type="text" name="productName" maxlength="45" required></td>
         </tr>
-    ';
-}
-?>
-<input name=“MAX_FILE_SIZE” value=“30000” hidden>
-        </table>
-    </form>
-</div>
-<?php 
+        <tr>
+            <td>Product Price: </td>
+            <td><input type="number" name="productPrice" required></td>
+        </tr>
+        <tr>
+            <td>Product Category: </td>
+            <td>
+                <select style="width: 100%;" id="productCategory" name="productCategory">';
+                    include ('connection.php');
+                    $sql = 'select name from category;'; 
+                    $result = mysqli_query($dbc, $sql);
+                
+                    while($row = mysqli_fetch_array($result)){
+                        echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+                    }
+                    
+                    echo '
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Product Description: </td>
+            <td><input type="textarea" name="productDescription" maxlength="100" required></td>
+        </tr>
+        <tr>
+            <td>Product Stock: </td>
+            <td><input type="number" name="productStock" required></td>
+        </tr>
+        <tr>
+            <td colspan=2 style="text-align:center;"><input type="submit" value="Add Product" name="submit"></td>
+        </tr>    
+        ';
+    } else {
+        echo '
+    <form class="form-signin" action="?upload" method="post" enctype="multipart/form-data" id="productForm">
+    <table style="margin: auto;">
+            <tr>
+                <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
+            </tr>
+            <tr>
+                <td rowspan=2 style="border-right: 2px solid #003366;"><h6>Select image to upload:</h6></td>
+                <td style="padding-left: 5px;">
+                    <input type="file" name="productImage" id="productImage"><br><br>
+                    <input type="submit" value="Attach File" name="submit">
+                    </td>
+            </tr>
+        ';
+    }
+
+    
+
+    echo "<input name=“MAX_FILE_SIZE” value=“30000” hidden>
+            </table>
+        </form>
+    </div>";
+
+    } else {
+        // redirect to home page if not logged in as admin
+        header("Location: main.php");
+    }
     include ('footer.php');
 ?>

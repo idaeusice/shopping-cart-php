@@ -23,4 +23,5 @@
         ?>
         <div id='title'>
         <h1><a href="main.php"><span style='color: orange;'>Dain</span>tree</a></h1>
+        <h2>Low Prices for High Tech</h2>
         </div>

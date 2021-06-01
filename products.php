@@ -5,7 +5,7 @@
     //categories when a post is made to products -- this will happen from the categories links. 
     if($_SERVER['QUERY_STRING'] != ''){
         include ('connection.php');
-
+        
         $category = str_replace('%20', ' ', $_SERVER['QUERY_STRING']);
         $sql = 'select * from products;';
 

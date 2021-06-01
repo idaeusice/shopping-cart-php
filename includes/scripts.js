@@ -100,7 +100,7 @@
         var emailValue = document.forms['login']['email'].value;
         var password = document.forms['login']['password'].value;
         var emailPat = /[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.+([a-zA-Z]){2,4}\.?([a-zA-Z])?/;
-        var passwordPat = /[a-zA-Z]{8,}/;
+        var passwordPat = /.{8,}/;
 
         if(emailValue.match(emailPat)){
             validity++;
