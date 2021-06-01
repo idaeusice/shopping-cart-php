@@ -156,6 +156,10 @@ h1 {
     margin-bottom: 18%;
 }
 
+.carousel-item {
+    text-align: center;
+}
+
 #carouselText{
     color: black;
     background-color: white;
@@ -163,15 +167,8 @@ h1 {
     position: absolute;
     text-align: center;
     width: auto;
-    margin-left: 200px;
-    margin-right: 200px;
-    margin-top: 10%;
-}
-
-#carouselText p {
-    text-align: center;
-    margin-left: 10%;
-    margin-right: 10%;
+    padding: 10px;
+    margin: 0 auto;
 }
 
 /* footer -- copyright info, contact details, legalese, etc. */
