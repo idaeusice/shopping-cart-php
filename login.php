@@ -20,10 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // fetch first row
     $row = mysqli_fetch_array($result);
-    
+
+    $hash = $row['password']; // store hashed password
+    //$hash = substr( $hash, 0, 60 ); // make sure hash is 60 chars, can use either this or the line below (below better)
+    $hash = trim($hash); // trim extra whitespace 
+
     // if valid email test password
     if (is_array($row)) {
-        $passCorrect = password_verify($password, $row['password']); // check if password matches
+        $passCorrect = password_verify($password, $hash); // check if password matches
     } else
         $passCorrect = 0; // invalid email, deny login
 
