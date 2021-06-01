@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `daintree_db`.`customer` (
   `email` VARCHAR(45) NOT NULL,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
   `admin` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`cust_id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) )
@@ -63,15 +63,15 @@ CREATE TABLE IF NOT EXISTS `daintree_db`.`product` (
   `archive` TINYINT(1) NOT NULL DEFAULT 0,
   `feature` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`prod_id`),
-  INDEX `fk_Product_Category1_idx` (`catagory_id` ASC) ,
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) ,
+  INDEX `fk_Product_Category1_idx` (`catagory_id` ASC) ,
   CONSTRAINT `fk_Product_Category1`
     FOREIGN KEY (`catagory_id`)
     REFERENCES `daintree_db`.`category` (`catagory_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 42
+AUTO_INCREMENT = 35
 DEFAULT CHARACTER SET = utf8;
 
 ALTER TABLE product AUTO_INCREMENT = 1;
