@@ -4,8 +4,6 @@ print "<div id='header'>";
     include ('menu.php');
 print "</div>";
 
-$loginIncorrect = false; // assume login successful by default (doesn't try to insert old email value) 
-
 // if submitted with POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect values of input fields -- email and password then verify and set session to logged in (use cust_id and admin)
@@ -44,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: main.php");
     } else {
         echo "<script>alert('incorrect login credentials')</script>";
-        $loginIncorrect = true;
     }
 }
 ?>
@@ -58,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <td><h2 style='text-align:center;'>Sign In</h2><br></td>
             </tr>
             <tr>                                                                                                               <!-- insert last emailed used if failed login -->
-                <td><input id='email' name='email' class='form-control' type='email' placeholder='Email' maxlength='45' value='<?php if ($loginIncorrect) echo $email ?>' required></td>
+                <td><input id='email' name='email' class='form-control' type='email' placeholder='Email' maxlength='45' value='<?php if (isset($email)) echo $email ?>' required></td>
             </tr>
             <tr>
                 <td><input  id='password' name ='password' class='form-control' placeholder='Password' type='password' minlength='8' maxlength='45' required><br></td>
