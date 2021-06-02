@@ -32,7 +32,10 @@
                     <td><input id='email' name='email' class='form-control' placeholder='Email' type='email' maxlength='45' required></td>
                 </tr>
                 <tr>
-                    <td><input  id='password' name ='password' class='form-control' placeholder='Password' type='password' minlength='8' maxlength='45' required><br></td>
+                    <td><input  id='password' name ='password' class='form-control' placeholder='Password' type='password' minlength='8' maxlength='45' required></td>
+                </tr>
+                <tr>
+                    <td><input  id='password2' name ='password2' class='form-control' placeholder='Password again' type='password' minlength='8' maxlength='45' required><br></td>
                 </tr>
                 <tr>
                     <td><input type='submit' name='submit' class='btn btn-primary btn-block' value='Sign Up'></td>
