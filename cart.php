@@ -51,15 +51,13 @@
         }
     } else {
         echo "<div id='emptyCart'>
-        <h4>You are not logged in. Please log in to add items to your cart.</h4>
-        <p>Start shopping <a href='main.php' style='text-decoration: none;'>here</a>
-        </div><br><br><br>";
+                <h4>You are not logged in. Please log in to add items to your cart.</h4>
+                <p><a href='main.php' style='text-decoration: none;'>Start shopping</a>
+                <br><br>
+                <a href='#' style='text-decoration: none;' onclick='back()'>Back to previous page</a>
+            </div>
+        </div>";
     }
-?>
 
-<a href='#' onclick='back()'>Back</a>
-</div>
-
-<?php 
     include ('footer.php');
 ?>
