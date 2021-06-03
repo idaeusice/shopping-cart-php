@@ -5,9 +5,15 @@
     print "</div>";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // collect value of input field
+
+        // collect value of input fields
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $password2 = $_POST['password2'];
+
+        
         
         
     }
@@ -17,7 +23,7 @@
 <!-- content if any -->
 <div id='signupContainer'>
     <div id='signupForm' style='position: relative; display: block; margin: auto;'>
-        <form class='form-signin' method='post' action='signup.php' onsubmit='validateLogin();' id='signup'>
+        <form class='form-signin' method='post' action='signup.php' onsubmit='return validateSignup();' id='signup'>
             <table style='margin: auto;'>
                 <tr>
                     <td><h2 style='text-align:center;'>Sign Up</h2><br></td>

@@ -1,127 +1,112 @@
 
-    function toggleCategories(){
-        $('#categoriesMenu').slideToggle();
-    }
+function toggleCategories(){
+    $('#categoriesMenu').slideToggle();
+}
 
-    function back(){
-        window.history.back();
-    }
+function back(){
+    window.history.back();
+}
 
-    function addToCart(){
-        if(true){
-            return true;
-        }
-    }
-
-    function addProduct(){
-        //category is not checked, because it will always be included.
-        var valid = 0,
-            productName = document.forms['addProduct']['productName'].value,
-            productPrice = document.forms['addProduct']['productPrice'].value,
-            productDescription = document.forms['addProduct']['productDescription'].value,
-            productStock = document.forms['addProduct']['productStock'].value;
-
-        if(productName.length < 1){
-            alert('');
-        } else {
-            valid++;
-        }
-        if(productPrice == ''){
-            alert('');
-        } else {
-            valid++;
-        }
-        if(productDescription.length < 1){
-            alert('');
-        } else {
-            valid++;
-        }
-        if(productStock < 1){
-            alert('');
-        } else {
-            valid++;
-        }
-
-        if(valid > 3){
-            return true;
-        } else {
-            alert('Error. Submission was invalid. Please try again and complete all fields.');
-            return false;
-        }
-    }
-
-    function validateSignup(){
-        var email = document.forms['login']['email'].value,
-            firstName = document.forms['login']['firstName'].value,
-            lastName = document.forms['login']['lastName'].value,
-            address = document.forms['login']['address'].value,
-            postalCode = document.forms['login']['postalCode'].value;
-
-        var emailPat = /[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.+([a-zA-Z]){2,4}\.?([a-zA-Z])?/;
-        var passwordPat = /[a-zA-Z]{8,}/;
-
-        if(email.match(emailPat)){
-            validity++;
-        } else {
-            alert('Please enter a valid email address.');
-            return false;
-        }
-
-        if(password.match(passwordPat)){
-            validity++;
-        } else {
-            alert('Password must be at least 8 characters.');
-            return false;
-        }
-
-        if(firstName.length() > 0){
-            validity++;
-        } else {
-            alert('You must enter a first name.');
-            return false;
-        }
-        
-        if(lastName.length() > 0){
-            validity++;
-        } else {
-            alert('You must enter a last name.');
-            return false;
-        }
-
-        if(validity > 3) {
-            return true;
-        }
-    }
-
-    function validateUpload(){
+function addToCart(){
+    if(true){
         return true;
     }
+}
 
-    function validateLogin(){
-        var validity = 0;
-        var emailValue = document.forms['login']['email'].value;
-        var password = document.forms['login']['password'].value;
-        var emailPat = /[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.+([a-zA-Z]){2,4}\.?([a-zA-Z])?/;
-        var passwordPat = /.{8,}/;
+function addProduct(){
+    //category is not checked, because it will always be included.
+    var valid = 0,
+        productName = document.forms['addProduct']['productName'].value,
+        productPrice = document.forms['addProduct']['productPrice'].value,
+        productDescription = document.forms['addProduct']['productDescription'].value,
+        productStock = document.forms['addProduct']['productStock'].value;
 
-        if(emailValue.match(emailPat)){
-            validity++;
-        } else {
-            alert('Please enter a valid email address.');
-            return false;
-        }
-
-        if(password.match(passwordPat)){
-            validity++;
-        } else {
-            alert('Password must be at least 8 characters.');
-            return false;
-        }
-
-        if(validity === 2){
-            window.location = 'main.php';
-        }
+    if(productName.length < 1){
+        alert('');
+    } else {
+        valid++;
     }
+    if(productPrice == ''){
+        alert('');
+    } else {
+        valid++;
+    }
+    if(productDescription.length < 1){
+        alert('');
+    } else {
+        valid++;
+    }
+    if(productStock < 1){
+        alert('');
+    } else {
+        valid++;
+    }
+
+    if(valid > 3){
+        return true;
+    } else {
+        alert('Error. Submission was invalid. Please try again and complete all fields.');
+        return false;
+    }
+}
+
+function validateSignup(){
+
+    var validity = 0;
+
+    // grab values from form
+    var firstName = document.forms['signup']['firstName'].value,
+        lastName  = document.forms['signup']['lastName'].value,
+        email     = document.forms['signup']['email'].value,
+        password  = document.forms['signup']['password'].value,
+        password2 = document.forms['signup']['password2'].value;
+
+    var emailPat = /[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.+([a-zA-Z]){2,4}\.?([a-zA-Z])?/;
+
+    const NUMBER_OF_CHECKS = 2; // number of checks performed below
+
+    if(email.match(emailPat)){ // check if email is valid
+        validity++;
+    } else {
+        alert('Please enter a valid email address.');
+        return false;
+    }
+
+    if (password === password2) { // check if passwords match
+        validity++;
+    } else {
+        alert('Passwords do not match.')
+        return false;
+    }
+
+    if(validity === NUMBER_OF_CHECKS) {
+        return true;
+    }
+}
+
+function validateUpload(){
+    return true;
+}
+
+function validateLogin(){
+    var validity = 0;
+    var emailValue = document.forms['login']['email'].value,
+        password = document.forms['login']['password'].value;
+    var emailPat = /[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.+([a-zA-Z]){2,4}\.?([a-zA-Z])?/;
+
+    const NUMBER_OF_CHECKS = 1; // number of checks performed below
+
+    if(emailValue.match(emailPat)){
+        validity++;
+    } else {
+        alert('Please enter a valid email address.');
+        return false;
+    }
+
+    if(validity === NUMBER_OF_CHECKS){
+        window.location = 'main.php';
+    }
+}
 
 window.onload = function() { // had to wrap scroll stuff in window.onload otherwise it wouldn't work
 

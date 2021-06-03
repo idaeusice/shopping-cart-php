@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- include in a modal? --> 
 <div id='loginContainer'>
     <!-- verify whether there is content -->
-    <form class='form-signin' method='post' action='login.php' onsubmit='return validateLogin();' id='login'>
+    <form class='form-login' method='post' action='login.php' onsubmit='return validateLogin();' id='login'>
         <table style='margin: auto;'>
             <tr>
                 <td><h2 style='text-align:center;'>Sign In</h2><br></td>
