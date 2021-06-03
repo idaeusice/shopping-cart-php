@@ -13,7 +13,7 @@
     if(isset($_SESSION['cust_id'])) { // if logged in (login.php)
 
       // sql query to get general info about indevidial items in the cart
-      $sql = 'SELECT (p.price * c.quantity) AS total, image, name, description, price, c.quantity
+      $sql = 'SELECT (p.price * c.quantity) AS total, p.prod_id, p.image, p.name, p.description, p.price, c.quantity
               FROM cart c INNER JOIN product p USING (prod_id)
               WHERE cust_id = ' . $_SESSION['cust_id'] . '
               GROUP BY p.prod_id;';
@@ -59,6 +59,9 @@
                 echo "</h3><h6>";
                     print $row['quantity'] . " in cart at $" . $row['price'] . " each.";
                 echo "</h6>
+                <form action='addCartProduct.php' method='post' class='noSubmit' id='formForIDNum" . $row['prod_id'] . "'>
+                  <button id='buttonForIDNum" . $row['prod_id'] . "'>Add Item</button>
+                </form>
             </div>
           </div>";
           /* ========================================================== OLD CODE
@@ -112,7 +115,8 @@
             </div><br><br><br>";
     }
 ?>
-
+<script src='includes/scripts.js'></script>
+<script src='includes/addItem.js'></script>
 <?php
     include ('footer.php');
 ?>
