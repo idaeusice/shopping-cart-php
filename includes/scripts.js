@@ -62,13 +62,36 @@ function validateSignup(){
         password2 = document.forms['signup']['password2'].value;
 
     var emailPat = /[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.+([a-zA-Z]){2,4}\.?([a-zA-Z])?/;
+    var namePat = /^\S*$/;     // only allow non-whitespace characters
+    var passwordPat = /^\S*$/; // only allow non-whitespace characters
 
-    const NUMBER_OF_CHECKS = 2; // number of checks performed below
+    const NUMBER_OF_CHECKS = 5; // number of checks performed below
 
     if(email.match(emailPat)){ // check if email is valid
         validity++;
     } else {
         alert('Please enter a valid email address.');
+        return false;
+    }
+
+    if(firstName.match(namePat)){ // check if firstName is valid
+        validity++;
+    } else {
+        alert('First name cannot contain whitespace characters.');
+        return false;
+    }
+
+    if(lastName.match(namePat)){ // check if lastName is valid
+        validity++;
+    } else {
+        alert('Last name cannot contain whitespace characters.');
+        return false;
+    }
+
+    if(password.match(passwordPat)){ // check if password is valid
+        validity++;
+    } else {
+        alert('Password cannot contain whitespace characters.');
         return false;
     }
 

@@ -6,12 +6,18 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+        include ('connection.php');
+
         // collect value of input fields
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
+
+
+
+
 
         
         
