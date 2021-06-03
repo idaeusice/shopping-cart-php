@@ -117,6 +117,7 @@
             </div>";
     }
 ?>
+</div>
 <script src='includes/scripts.js'></script>
 <script src='includes/addItem.js'></script>
 <?php
