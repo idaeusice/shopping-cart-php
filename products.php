@@ -35,7 +35,7 @@
             echo "<p style='float: right'><span style='font-weight: bold'>Welcome, </span>" . $_SESSION['first_name'] . "!</p>";
         
         while($row = mysqli_fetch_array($prodResult)){
-            if($row['archive'] == 0 || $_SESSION['admin'] == 1) {
+            if($row['archive'] == 0 || (isset($_SESSION['admin']) && $_SESSION['admin'] == 1)) {
                 echo "
                 <div class='row border-bottom'>
                 <div class='col-sm border-right'>
