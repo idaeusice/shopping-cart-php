@@ -5,7 +5,7 @@
 
 <div id='main'>
     <div class='box'>
-        <h1 class='message'>You have successfully logged out</h1>
+        <h1 class='message'>You have successfully logged out.</h1>
     </div>
 </div>
 
