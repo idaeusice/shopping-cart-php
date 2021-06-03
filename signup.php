@@ -17,14 +17,13 @@
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
 
-        // first check the database to make sure 
-        // a user does not already exist with the same username and/or email
+        // check the database to make sure a user does not already exist with the same email
         $user_check_query = "SELECT * FROM customer WHERE email='$email'";
         $result = mysqli_query($dbc, $user_check_query);
         $user = mysqli_fetch_array($result);
         
         if ($user) { // if user email exists
-            array_push($errors, "Email already exists, please try again.");
+            array_push($errors, "Email already exists, please try again."); // add error onto error array
         }
 
         // register user if there are no errors
