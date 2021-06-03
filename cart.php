@@ -10,10 +10,10 @@
 <?php
     include ('connection.php');
 
-    if(isset($_SESSION['id'])){
+    if(isset($_SESSION['cust_id'])){
         $sql = 'select sum(price) total, image, name, price, c.quantity from cart c join product p
             on c.prod_id=p.prod_id
-            where cust_id=' . $_SESSION['id'] . ';'; 
+            where cust_id=' . $_SESSION['cust_id'] . ';'; 
 
         $result = mysqli_query($dbc, $sql);
 

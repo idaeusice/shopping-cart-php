@@ -28,8 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hash = trim($hash); // trim extra whitespace 
 
         $passCorrect = password_verify($password, $hash); // check if password matches
-    } else
+    } else {
         $passCorrect = 0; // invalid email, deny login
+    }
 
     // if SQL returns a match set session variables (user is logged in)
     if (isset($passCorrect) && $passCorrect == 1) {
@@ -49,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- include in a modal? --> 
 <div id='loginContainer'>
     <!-- verify whether there is content -->
-    <form class='form-signin' method='post' action='login.php' onsubmit='return validateLogin();' id='login'>
+    <form class='form-login' method='post' action='login.php' onsubmit='return validateLogin();' id='login'>
         <table style='margin: auto;'>
             <tr>
                 <td><h2 style='text-align:center;'>Sign In</h2><br></td>
