@@ -112,7 +112,7 @@
       } // end of if
     } else { // if not logged in
       echo "<div id='emptyCart'>
-            <h4>You are not logged in. Please log in to add items to your cart.</h4>
+            <h1 class='message'>You are not logged in. Please log in to add items to your cart.</h1>
             <p>Start shopping <a href='main.php' style='text-decoration: none;'>here</a>
             </div><br><br><br>";
     }
