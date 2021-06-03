@@ -10,18 +10,11 @@
 <?php
     include ('connection.php');
 
-<<<<<<< HEAD
-    if(isset($_SESSION['cust_id'])){
-        $sql = 'select sum(price) total, image, name, price, c.quantity from cart c join product p
-            on c.prod_id=p.prod_id
-            where cust_id=' . $_SESSION['cust_id'] . ';'; 
-=======
     if(isset($_SESSION['cust_id'])){ // if logged in (login.php)
       $sql = 'select (p.price * c.quantity) as total, image, name, description, price, c.quantity from cart c join product p
               on c.prod_id=p.prod_id
               where cust_id=' . $_SESSION['cust_id'] . '
               GROUP BY p.prod_id;';
->>>>>>> wip-01-cart
 
       $result = mysqli_query($dbc, $sql);
 
@@ -80,31 +73,15 @@
                     <h6>Remove</h6>
                 </div>
                 </div>";
-<<<<<<< HEAD
-        }
-    } else {
-        echo "<div id='emptyCart'>
-                <h4>You are not logged in. Please log in to add items to your cart.</h4>
-                <p><a href='main.php' style='text-decoration: none;'>Start shopping</a>
-                <br><br>
-                <a href='#' style='text-decoration: none;' onclick='back()'>Back to previous page</a>
-            </div>
-        </div>";
-=======
           */
         } // end of while rows remain
       } // end of if
     } else { // if not logged in
       echo "<div id='emptyCart'>
-            <h4>You are not logged in. Please log in to add items to your cart.</h4>
+            <h1 class='message'>You are not logged in. Please log in to add items to your cart.</h1>
             <p>Start shopping <a href='main.php' style='text-decoration: none;'>here</a>
-            </div><br><br><br>";
->>>>>>> wip-01-cart
+            </div>";
     }
 
-<<<<<<< HEAD
-=======
-<?php
->>>>>>> wip-01-cart
     include ('footer.php');
 ?>

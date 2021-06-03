@@ -221,6 +221,21 @@ h1 {
     margin: 10em;
 }
 
+.message {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 26px;
+    margin: 2em 0 0.5em 0;
+}
+
+.box {
+    margin: 120px 0 3em 0;
+}
+
+#emptyCart {
+    margin-bottom: 3em;
+}
+
 /* Browser-specific Styling */
 
 /* Chrome, Safari, Edge, Opera */
