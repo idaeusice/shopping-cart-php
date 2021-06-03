@@ -11,7 +11,7 @@
     include ('connection.php');
 
     if(isset($_SESSION['cust_id'])){ // if logged in (login.php)
-      $sql = 'select p.price * c.quantity, image, name, description, price, c.quantity from cart c join product p
+      $sql = 'select (p.price * c.quantity) as total, image, name, description, price, c.quantity from cart c join product p
               on c.prod_id=p.prod_id
               where cust_id=' . $_SESSION['cust_id'] . '
               GROUP BY p.prod_id;';
@@ -38,7 +38,7 @@
                 <h3>";
                     print $row['name'];
                 echo "</h3><h6>";
-                    print $row['description'];
+                    print $row['quantity'] . " in cart at $" . $row['price'] . " each.";
                 echo "</h6>
             </div>
           </div>";
