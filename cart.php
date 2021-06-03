@@ -36,10 +36,12 @@
         }
 
         // resets $_POST  and the variables so that refreshing the page doesn't increment/decriment quantity
-        $_POST['idOfProd'] = 0; // prevent form from being resubmited
         $changeQuantityOf = 0;
         $changeHow = 'dont';
         $forWho = 'noone';
+        // prevent form from being resubmited
+        unset($_POST);
+        header("Location: ".$_SERVER['PHP_SELF']);
       } // end of if server post request
 
       // sql query to get general info about indevidial items in the cart
@@ -86,7 +88,6 @@
             <div class='col-sm border-right' style='margin:auto;'> <!-- name & price -->
               <form action='' method='post' id='formForIDNum" . $row['prod_id'] . "'>
                 <h3>";
-                  $_POST = array(); // prevent form from being resubmited
                     print $row['name'];
                   echo "</h3><h6>";
                     print $row['quantity'] . " in cart at $" . $row['price'] . " each.";
