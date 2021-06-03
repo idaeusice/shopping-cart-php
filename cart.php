@@ -11,6 +11,36 @@
     include ('connection.php');
 
     if(isset($_SESSION['cust_id'])) { // if logged in (login.php)
+      if($_SERVER["REQUEST_METHOD"] == "POST") { // if a button to add or remove items has been pressed
+
+        $changeQuantityOf = $_POST['idOfProd']; // prod_id
+        $changeHow = $_POST['submit']; // -1, +1, or Remove+All
+        $forWho = $_SESSION['cust_id'];
+
+        if($changeHow == '-1') {
+          $updateCartSql = "UPDATE cart
+                            SET quantity = quantity - 1
+                            WHERE prod_id = '$changeQuantityOf'
+                            AND cust_id = '$forWho';";
+
+          mysqli_query($dbc, $updateCartSql);
+        } elseif($changeHow == '+1') {
+          $updateCartSql = "UPDATE cart
+                            SET quantity = quantity + 1
+                            WHERE prod_id = '$changeQuantityOf'
+                            AND cust_id = '$forWho';";
+
+          mysqli_query($dbc, $updateCartSql);
+        } elseif($changeHow == 'Remove+All') {
+
+        }
+
+        // resets $_POST  and the variables so that refreshing the page doesn't increment/decriment quantity
+        $_POST['idOfProd'] = 0; // prevent form from being resubmited
+        $changeQuantityOf = 0;
+        $changeHow = 'dont';
+        $forWho = 'noone';
+      } // end of if server post request
 
       // sql query to get general info about indevidial items in the cart
       $sql = 'SELECT (p.price * c.quantity) AS total, p.prod_id, p.image, p.name, p.description, p.price, c.quantity
@@ -54,48 +84,20 @@
             </div>
 
             <div class='col-sm border-right' style='margin:auto;'> <!-- name & price -->
+              <form action='' method='post' id='formForIDNum" . $row['prod_id'] . "'>
                 <h3>";
+                  $_POST = array(); // prevent form from being resubmited
                     print $row['name'];
-                echo "</h3><h6>";
+                  echo "</h3><h6>";
                     print $row['quantity'] . " in cart at $" . $row['price'] . " each.";
-                echo "</h6>
-                <form action='addCartProduct.php' method='post' class='noSubmit' id='formForIDNum" . $row['prod_id'] . "'>
-                  <button id='buttonForIDNum" . $row['prod_id'] . "'>Add Item</button>
-                </form>
+                  echo "</h6>
+                <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
+                <input type='submit' name='submit' value='-1'/>
+                <input type='submit' name='submit' value='+1'/><br>
+                <input type='submit' name='submit' value='Remove All'/>
+              </form>
             </div>
           </div>";
-          /* ========================================================== OLD CODE
-            echo "<div class='cartRow border-bottom'>
-                <div class='col-sm border-right'>
-                    <div class='prodImage'>
-                        <img class='img-fluid img-thumbnail' src='";
-                        if(is_null($row['image'])){
-                            print 'includes\resources\images\sample.jpg';
-                        } else {
-                            print $row['image'];
-                        };
-                        echo "'>
-                    </div>
-                </div>
-                <div class='col-sm border-right' style='margin:auto;'>
-                    <h3>";
-                print $row['name'];
-                echo"</h3>
-                </div>
-                <div class='col-sm border-right' style='margin:auto;'>
-                    <div class='row container'>
-                        <div class='col-sm'>
-                            <h4>$";
-                        print $row['price'] . '</h4><br><h6> Available: ' . $row['quantity'] . '</h6>';
-                echo "
-                        </div>
-                    </div>
-                </div>
-                <div class='col-sm' style='margin:auto;'>
-                    <h6>Remove</h6>
-                </div>
-                </div>";
-          // =================================================== END OF OLD CODE */
         } // end of while rows remain
         echo "
         <div class='row'>
