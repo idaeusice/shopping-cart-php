@@ -9,27 +9,28 @@ if(!empty($_POST)) {
     $custID = $_POST['cust_id'];
 
     // check the cart to see if the product is already present
-    $checkCart = "SELECT prod_id, c.cust_id, p.price
-                  FROM cart c INNER JOIN product p USING (prod_id)
-                  WHERE cust_id = '$custID' ;";
+    $checkCart = "SELECT prod_id, cust_id, quantity
+                  FROM cart c
+                  WHERE cust_id = '$custID'
+                  AND prod_id = '$prodID';
+                  ";
 
     $checkResults = mysqli_query($dbc, $checkCart);
     // put the result row into an array
     $row = mysqli_fetch_array($checkResults);
 
     // if the item isn't present, add it to the database with a quantity of one
-    if(mysqli_num_rows($checkResults) == 0) {
-      $prodPrice = $row['price'];
-      $insertCart = "INSERT INTO cart (prod_id, cust_id, quantity, price)
-                     VALUES ('$prodID', '$custID', 1, '$prodPrice');";
-
-      mysqli_query($dbc, $insertCart);
-    } else { // else increase its amount by one
+    if(mysqli_num_rows($checkResults) == 1) {
       $updateCart = "UPDATE cart
-                        SET quantity = quantity + 1
-                        WHERE prod_id = '$prodID';";
+                     SET quantity = quantity + 1
+                     WHERE prod_id = '$prodID';";
 
       mysqli_query($dbc, $updateCart);
+    } else { // else increase its amount by one
+      $insertCart = "INSERT INTO cart (prod_id, cust_id, quantity)
+                     VALUES ('$prodID', '$custID', 1)";
+
+      mysqli_query($dbc, $insertCart);
     }
   //} // end of isset
 } // end of request method

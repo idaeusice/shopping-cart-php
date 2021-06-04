@@ -105,7 +105,8 @@
                                     <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
                                     <input id='custID" . $row['prod_id'] . "' type='hidden' name='idOfCust' value='" . $_SESSION['cust_id'] . "'/>
                                 </button>
-                              </form>";
+                              </form>
+                              <div class='result'></div>";
                             }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
@@ -202,7 +203,7 @@ else{
                             print $row['price'] . '</h4><br><h6> Current Stock: ' . $row['units'] . '</h6>';
                             if(isset($_SESSION['admin']) && !$_SESSION['admin'] == 1) {
                               echo "
-                              <form method='post' id='" . $row['prod_id'] . "' onsubmit='addItemToCart('" . $row['prod_id'] . "', '" . $_SESSION['cust_id'] . "')'>
+                              <form method='post' id='" . $row['prod_id'] . "' action=''>
                                 <button type='submit' class='btn btn-primary addItemButton' data-toggle='modal' data-target='#exampleModal'>
                                     <strong>Add to Cart</strong><br>
                                     <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>

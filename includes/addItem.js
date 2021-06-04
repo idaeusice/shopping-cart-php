@@ -10,6 +10,8 @@ $(document).ready(function () {
     // put the customer id into a variable
     var cust_id = document.getElementById(customerInputID).value;
 
+    console.log(cust_id, prod_id);
+
     $.ajax({
       type: "POST",
       url: "addCartProduct.php",
