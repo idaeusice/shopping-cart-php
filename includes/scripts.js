@@ -1,4 +1,3 @@
-
 function toggleCategories(){
     $('#categoriesMenu').slideToggle();
 }

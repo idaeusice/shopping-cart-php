@@ -93,9 +93,9 @@
                         print $row['quantity'] . " in cart at $" . $row['price'] . " each.";
                     echo "</h6>
                     <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
-                    <input type='submit' name='submit' value='-1'/>
-                    <input type='submit' name='submit' value='+1'/><br>
-                    <input type='submit' name='submit' value='Remove All'/>
+                    <input class='btn btn-outline-warning' type='submit' name='submit' value='-1'/>
+                    <input class='btn btn-outline-success' type='submit' name='submit' value='+1'/><br>
+                    <input class='btn btn-outline-danger' type='submit' name='submit' value='Remove All' style='margin-top: 0.5em'/>
                 </form>
                 </div>
             </div>";
