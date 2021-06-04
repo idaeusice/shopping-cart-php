@@ -5,6 +5,79 @@
     print "</div>";
     
     if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) { // make sure only admins can access this page
+        if($_SERVER['QUERY_STRING'] == 'submit'){
+            if($productName = $_POST['productName'] == '' || $productPrice = $_POST['productPrice'] == '' || $productStock = $_POST['productStock'] == '' ||
+            $productDescription = $_POST['productDescription'] == ''){
+                echo '<div class="errAddProd"><h3>Your product was not added successfully.</h3></div>'; 
+                if($productName = $_POST['productName'] == ''){
+                    echo '<div class="errAddProd">The product name was not entered.</div>';
+                }
+                if($productPrice = $_POST['productPrice'] == ''){
+                    echo '<div class="errAddProd">The product price was not entered.</div>';
+                }
+                if($productStock = $_POST['productStock'] == ''){
+                    echo '<div class="errAddProd">The quanitity in stock was not entered.</div>';
+                }
+                if($productDescription = $_POST['productDescription'] == ''){
+                    echo '<div class="errAddProd">The product description was not entered.</div>';
+                }
+            } else {
+                //table variables that are set after the user uploads an image.
+                include ('connection.php');
+
+                $file = 'includes/resources/images/' . $_SESSION['file'];
+                $uploadOk = 0;
+                if($file == 'includes/resources/images/'){
+                    $file = 'includes/resources/images/notfound.jpg';
+                } 
+
+                $productCategory = $_POST['productCategory'];
+                $productName = $_POST['productName'];
+                $productPrice = $_POST['productPrice'];
+                $productStock = $_POST['productStock'];
+                $productDescription = $_POST['productDescription'];
+                
+                $checkSql = "select name from product name where name=" . $productName . ";";
+                $checkResult = mysqli_query($dbc, $sql);
+                while($row = mysqli_fetch_array($checkResult)){
+                    if($row == $productName){
+                        $uploadOk = 0;
+                    } else {
+                        $uploadOk = 1;
+                    }
+                }
+                if($uploadOk === 1){
+                    $sql = "
+                    insert into product(
+                        prod_id,
+                        catagory_id, 
+                        name, 
+                        price, 
+                        units, 
+                        description, 
+                        image) 
+                    VALUES (
+                        (select max(prod_id) + 1 from product p),
+                        (select catagory_id from category c where c.name like concat(upper(substring('" . $productCategory . "', 1, 1)),lower(substring('" . $productCategory . "', 2)))), 
+                        '" . $productName . "', 
+                        '" . $productPrice . "', 
+                        '" . $productStock . "', 
+                        '" . $productDescription . "',
+                        '" . $file  . "'
+                        );
+                        ";
+                    $result = mysqli_query($dbc, $sql);
+
+                    echo "<div style='text-align:center; margin-top: 40px;'><h3>Your product has been successfully added.</h3></div>";
+
+                } else {
+                    echo "<div class='errAddProd'>A product with this name has already been added.</div>";
+                }
+            }
+        }
+
+        echo '<div id="addProduct">';
+
         if($_SERVER['QUERY_STRING'] == 'upload'){
             //file upload handling. File needs to be uploaded 
             //before the rest of the form is submitted.
@@ -26,65 +99,8 @@
                 echo  "<img class='image' src='includes/resources/images/noimgplaceholder.png' style='max-height: 300px;'>";
                 echo "<p>No file was attached. The default image will be used.</p>";
             }
-            echo "</div>";
-        }
-
-        if($_SERVER['QUERY_STRING'] == 'submit'){
-            //table variables that are set after the user uploads an image.
-            include ('connection.php');
-
-            $file = 'includes/resources/images/' . $_SESSION['file'];
-            $uploadOk = 0;
-            if($file == 'includes/resources/images/'){
-                $file = 'includes/resources/images/notfound.jpg';
-            } 
-
-            $productCategory = $_POST['productCategory'];
-            $productName = $_POST['productName'];
-            $productPrice = $_POST['productPrice'];
-            $productStock = $_POST['productStock'];
-            $productStock = $_POST['productStock'];
-            $productDescription = $_POST['productDescription'];
-            
-            $checkSql = "select name from product name where name=" . $productName . ";";
-            $checkResult = mysqli_query($dbc, $sql);
-            while($row = mysqli_fetch_array($checkResult)){
-                if($row == $productName){
-                    $uploadOk = 1;
-                } else {
-                    $uploadOk = 0;
-                }
-            }
-            if($uploadOk === 1){
-        
-                $sql = "
-                insert into product(
-                    prod_id,
-                    catagory_id, 
-                    name, 
-                    price, 
-                    units, 
-                    description, 
-                    image) 
-                VALUES (
-                    (select max(prod_id) + 1 from product p),
-                    (select catagory_id from category c where c.name like concat(upper(substring('" . $productCategory . "', 1, 1)),lower(substring('" . $productCategory . "', 2)))), 
-                    '" . $productName . "', 
-                    '" . $productStock . "', 
-                    '" . $productPrice . "', 
-                    '" . $productDescription . "',
-                    '" . $file  . "'
-                    );
-                    ";
-                $result = mysqli_query($dbc, $sql);
-            }
-        }
-
-        echo '<div id="addProduct">';
-
-        if($_SERVER['QUERY_STRING'] == 'upload'){
             echo '
-        <form class="form-signin" action="?submit" method="post" enctype="multipart/form-data" id="productForm">
+        <form class="form-signin" method="post" action="?submit" enctype="multipart/form-data" id="productForm">
         <table style="margin: auto;">
             <tr>
                 <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
@@ -125,7 +141,9 @@
                 <td colspan=2 style="text-align:center;"><input type="submit" value="Add Product" name="submit"></td>
             </tr>    
             ';
-        } else {
+        } 
+        
+        if($_SERVER['QUERY_STRING'] == ''){
             echo '
         <form class="form-signin" action="?upload" method="post" enctype="multipart/form-data" id="productForm">
         <table style="margin: auto;">

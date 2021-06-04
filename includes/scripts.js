@@ -16,22 +16,26 @@ function addProduct(){
         productStock = document.forms['addProduct']['productStock'].value;
 
     if(productName.length < 1){
-        alert('');
+        alert('Error. Submission was invalid. Please try again and complete all fields.');
+        return false;
     } else {
         valid++;
     }
     if(productPrice == ''){
-        alert('');
+        alert('Error. Submission was invalid. Please try again and complete all fields.');
+        return false;
     } else {
         valid++;
     }
     if(productDescription.length < 1){
-        alert('');
+        alert('Error. Submission was invalid. Please try again and complete all fields.');
+        return false;
     } else {
         valid++;
     }
     if(productStock < 1){
-        alert('');
+        alert('Error. Submission was invalid. Please try again and complete all fields.');
+        return false;
     } else {
         valid++;
     }
@@ -118,10 +122,6 @@ function validateSignup(){
     if(validity === NUMBER_OF_CHECKS) {
         return true;
     }
-}
-
-function validateUpload(){
-    return true;
 }
 
 function validateLogin(){
