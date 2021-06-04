@@ -71,6 +71,7 @@
 
       if(mysqli_num_rows($result) > 0) { // if there is more than 1 row
         while($row = mysqli_fetch_array($result)) { // loop through each row
+        if($row['quantity'] > 0){
           echo "
           <div class='row'>
             <div class='col-sm'> <!-- image -->
@@ -84,21 +85,21 @@
                 echo "'>
               </div>
             </div>
-
-            <div class='col-sm border-right' style='margin:auto;'> <!-- name & price -->
-              <form action='' method='post' id='formForIDNum" . $row['prod_id'] . "'>
-                <h3>";
-                    print $row['name'];
-                  echo "</h3><h6>";
-                    print $row['quantity'] . " in cart at $" . $row['price'] . " each.";
-                  echo "</h6>
-                <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
-                <input type='submit' name='submit' value='-1'/>
-                <input type='submit' name='submit' value='+1'/><br>
-                <input type='submit' name='submit' value='Remove All'/>
-              </form>
-            </div>
-          </div>";
+                <div class='col-sm border-right' style='margin:auto;'> <!-- name & price -->
+                <form action='' method='post' id='formForIDNum" . $row['prod_id'] . "'>
+                    <h3>";
+                        print $row['name'];
+                    echo "</h3><h6>";
+                        print $row['quantity'] . " in cart at $" . $row['price'] . " each.";
+                    echo "</h6>
+                    <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
+                    <input type='submit' name='submit' value='-1'/>
+                    <input type='submit' name='submit' value='+1'/><br>
+                    <input type='submit' name='submit' value='Remove All'/>
+                </form>
+                </div>
+            </div>";
+            }
         } // end of while rows remain
         echo "
         <div class='row'>
