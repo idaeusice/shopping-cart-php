@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         header("Location: main.php");
     } else {
-        echo "<script>alert('incorrect login credentials')</script>";
+        echo "<script>alert('Incorrect login credentials. Please try again.')</script>";
     }
 }
 ?>

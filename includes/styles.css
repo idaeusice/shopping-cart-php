@@ -243,6 +243,10 @@ h1 {
     margin-bottom: 3em;
 }
 
+.no-underline, .no-underline:hover {
+    text-decoration: none !important;
+}
+
 /* Browser-specific Styling */
 
 /* Chrome, Safari, Edge, Opera */
