@@ -124,7 +124,7 @@
     } else { // if not logged in
       echo "<div id='emptyCart'>
             <h1 class='message'>You are not logged in. Please log in to add items to your cart.</h1>
-            <a href='main.php' class='no-underline'>Start shopping</a>
+            <a href='main.php' class='no-underline'>Browse products</a> or <a href='login.php' class='no-underline'>log in</a>
             </div>";
     }
 ?>
