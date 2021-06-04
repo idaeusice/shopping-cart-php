@@ -46,7 +46,26 @@ function addProduct(){
 
 function validateSignup(){
 
-    var validity = 0;
+        if(productName.length < 1){
+            alert('Please enter a valid product name.');
+        } else {
+            valid++;
+        }
+        if(productPrice == ''){
+            alert('Please enter a valid product price.');
+        } else {
+            valid++;
+        }
+        if(productDescription.length < 1){
+            alert('Please enter a valid description.');
+        } else {
+            valid++;
+        }
+        if(productStock < 1){
+            alert('Please enter valid value for the product\'s stock.');
+        } else {
+            valid++;
+        }
 
     // grab values from form
     var firstName = document.forms['signup']['firstName'].value,
