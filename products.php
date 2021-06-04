@@ -33,7 +33,7 @@
         // if logged in show welcome message
         if (isset($_SESSION['first_name']))
             echo "<p style='float: right'><span style='font-weight: bold'>Welcome, </span>" . $_SESSION['first_name'] . "!</p>";
-        
+
         while($row = mysqli_fetch_array($prodResult)){
             if($row['archive'] == 0 || (isset($_SESSION['admin']) && $_SESSION['admin'] == 1)) {
                 echo "
@@ -63,11 +63,17 @@
                         <div class='col-sm'>
                             <h4>$";
                             print $row['price'] . '</h4><br><h6> Current Stock: ' . $row['units'] . '</h6>';
-                            echo "
-                            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' onclick='addToCart(" . $row['prod_id'] . ");'>
-                                <strong>Add to Cart</strong><br>
-                                <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
-                            </button>";
+                            if(isset($_SESSION['admin']) && !$_SESSION['admin'] == 1) {
+                              echo "
+                              <form method='post' id='" . $row['prod_id'] . "' onsubmit='addItemToCart('" . $row['prod_id'] . "', '" . $_SESSION['cust_id'] . "')'>
+                                <button type='submit' class='btn btn-primary addItemButton' data-toggle='modal' data-target='#exampleModal'>
+                                    <strong>Add to Cart</strong><br>
+                                    <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
+                                    <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
+                                    <input id='custID" . $_SESSION['cust_id'] . "' type='hidden' name='idOfCust' value='" . $_SESSION['cust_id'] . "'/>
+                                </button>
+                              </form>";
+                            }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
                                 echo "<button class='btn btn-danger' id='feature" . $row['prod_id'] . "' onclick='feature('feature" . $row['prod_id'] . "')'>Feature</button>";
@@ -161,11 +167,17 @@ else{
                         <div class='col-sm'>
                             <h4>$";
                             print $row['price'] . '</h4><br><h6> Current Stock: ' . $row['units'] . '</h6>';
-                            echo "
-                            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' onclick='addToCart(" . $row['prod_id'] . ");'>
-                                <strong>Add to Cart</strong><br>
-                                <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
-                            </button>";
+                            if(isset($_SESSION['admin']) && !$_SESSION['admin'] == 1) {
+                              echo "
+                              <form method='post' id='" . $row['prod_id'] . "' onsubmit='addItemToCart('" . $row['prod_id'] . "', '" . $_SESSION['cust_id'] . "')'>
+                                <button type='submit' class='btn btn-primary addItemButton' data-toggle='modal' data-target='#exampleModal'>
+                                    <strong>Add to Cart</strong><br>
+                                    <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
+                                    <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
+                                    <input id='custID" . $_SESSION['cust_id'] . "' type='hidden' name='idOfCust' value='" . $_SESSION['cust_id'] . "'/>
+                                </button>
+                              </form>";
+                            }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
                                 echo "<button class='btn btn-danger' id='feature" . $row['prod_id'] . "' onclick='feature('feature" . $row['prod_id'] . "')'>Feature</button>";
@@ -180,3 +192,4 @@ else{
         }
 }//end else (shows all products)
 ?>
+<script src="includes/addItem.js"></script>
