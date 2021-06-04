@@ -116,7 +116,7 @@
         } else {
             echo "<div class='box'>
                     <h1 class='message'>Your cart is empty.</h1>
-                    <a href='main.php'>Start shopping</a>
+                    <a href='main.php' class='no-underline'>Start shopping</a>
                   </div>";
         }
         
@@ -124,7 +124,7 @@
     } else { // if not logged in
       echo "<div id='emptyCart'>
             <h1 class='message'>You are not logged in. Please log in to add items to your cart.</h1>
-            <p>Start shopping <a href='main.php' style='text-decoration: none;'>here</a>
+            <a href='main.php' class='no-underline'>Start shopping</a>
             </div>";
     }
 ?>
