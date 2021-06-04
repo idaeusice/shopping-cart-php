@@ -7,12 +7,6 @@ function back(){
     window.history.back();
 }
 
-function addToCart(){
-    if(true){
-        return true;
-    }
-}
-
 function addProduct(){
     //category is not checked, because it will always be included.
     var valid = 0,
@@ -135,11 +129,11 @@ window.onload = function() { // had to wrap scroll stuff in window.onload otherw
 
     window.onscroll = function() {
         // for sticky navbar
-        stickyNav(); 
+        stickyNav();
         // for scroll to top button
         scrollToTop();
     };
-    
+
     // for sticky navbar
     var navbar = document.getElementById("navbar");
     var sticky = navbar.offsetTop;

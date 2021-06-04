@@ -1,5 +1,38 @@
 <!-- can be callable or display the data directly on the page -->
 <?php
+    // include('addCartProduct.php'); This line was part of an attempt to get the page to not refresh but I couldn't get it to work
+    /*
+    // if one of the add item to cart buttons is clicked it will add that item to the customer's cart
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['cust_id'])) {
+
+      // assign both id's to variables for tidyness
+      $prodID = $_POST['prod_id'];
+      $custID = $_SESSION['cust_id'];
+
+      // check the cart to see if the product is already present
+      $checkCart = "SELECT prod_id, c.cust_id, p.price
+                    FROM cart c INNER JOIN product p USING (prod_id)
+                    WHERE cust_id = '$custID' ;";
+
+      $checkResults = mysqli_query($dbc, $checkCart);
+      // put the result row into an array
+      $row = mysqli_fetch_array($checkResults);
+
+      // if the item isn't present, add it to the database with a quantity of one
+      if(mysqli_num_rows($checkResults) == 0) {
+        $prodPrice = $row['price'];
+        $insertCart = "INSERT INTO cart (prod_id, cust_id, quantity, price)
+                       VALUES ('$prodID', '$custID', 1, '$prodPrice');";
+
+        mysqli_query($dbc, $insertCart);
+      } else { // else increase its amount by one
+        $updateCart = "UPDATE cart
+                          SET quantity = quantity + 1
+                          WHERE prod_id = '$prodID';";
+
+        mysqli_query($dbc, $updateCart);
+      } // end of adding item to cart */
+
     // set category to "All Items" by default
     $category = 'All Items';
     //categories when a post is made to products -- this will happen from the categories links.
@@ -33,7 +66,7 @@
         // if logged in show welcome message
         if (isset($_SESSION['first_name']))
             echo "<p style='float: right'><span style='font-weight: bold'>Welcome, </span>" . $_SESSION['first_name'] . "!</p>";
-        
+
         while($row = mysqli_fetch_array($prodResult)){
             if($row['archive'] == 0 || (isset($_SESSION['admin']) && $_SESSION['admin'] == 1)) {
                 echo "
@@ -63,11 +96,18 @@
                         <div class='col-sm'>
                             <h4>$";
                             print $row['price'] . '</h4><br><h6> Current Stock: ' . $row['units'] . '</h6>';
-                            echo "
-                            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' onclick='addToCart(" . $row['prod_id'] . ");'>
-                                <strong>Add to Cart</strong><br>
-                                <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
-                            </button>";
+                            if(isset($_SESSION['admin']) && !$_SESSION['admin'] == 1) {
+                              echo "
+                              <form method='post' id='" . $row['prod_id'] . "' action=''>
+                                <button type='submit' class='btn btn-primary addItemButton' data-toggle='modal' data-target='#exampleModal'>
+                                    <strong>Add to Cart</strong><br>
+                                    <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
+                                    <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
+                                    <input id='custID" . $row['prod_id'] . "' type='hidden' name='idOfCust' value='" . $_SESSION['cust_id'] . "'/>
+                                </button>
+                              </form>
+                              <div class='result'></div>";
+                            }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
                                 echo "<button class='btn btn-danger' id='feature" . $row['prod_id'] . "' onclick='feature('feature" . $row['prod_id'] . "')'>Feature</button>";
@@ -161,11 +201,18 @@ else{
                         <div class='col-sm'>
                             <h4>$";
                             print $row['price'] . '</h4><br><h6> Current Stock: ' . $row['units'] . '</h6>';
-                            echo "
-                            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' onclick='addToCart(" . $row['prod_id'] . ");'>
-                                <strong>Add to Cart</strong><br>
-                                <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
-                            </button>";
+                            if(isset($_SESSION['admin']) && !$_SESSION['admin'] == 1) {
+                              echo "
+                              <form method='post' id='" . $row['prod_id'] . "' action=''>
+                                <button type='submit' class='btn btn-primary addItemButton' data-toggle='modal' data-target='#exampleModal'>
+                                    <strong>Add to Cart</strong><br>
+                                    <a class='material-icons' style='text-decoration: none; color: white; padding-top:5px;'>add_shopping_cart</a>
+                                    <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
+                                    <input id='custID" . $row['prod_id'] . "' type='hidden' name='idOfCust' value='" . $_SESSION['cust_id'] . "'/>
+                                </button>
+                              </form>
+                              <div class='result'></div>";
+                            }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
                                 echo "<button class='btn btn-danger' id='feature" . $row['prod_id'] . "' onclick='feature('feature" . $row['prod_id'] . "')'>Feature</button>";
@@ -180,3 +227,4 @@ else{
         }
 }//end else (shows all products)
 ?>
+<script src="includes/addItem.js"></script>
