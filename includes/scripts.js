@@ -22,22 +22,22 @@
             productStock = document.forms['addProduct']['productStock'].value;
 
         if(productName.length < 1){
-            alert('');
+            alert('Please enter a valid product name.');
         } else {
             valid++;
         }
         if(productPrice == ''){
-            alert('');
+            alert('Please enter a valid product price.');
         } else {
             valid++;
         }
         if(productDescription.length < 1){
-            alert('');
+            alert('Please enter a valid description.');
         } else {
             valid++;
         }
         if(productStock < 1){
-            alert('');
+            alert('Please enter valid value for the product\'s stock.');
         } else {
             valid++;
         }

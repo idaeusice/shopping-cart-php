@@ -25,7 +25,63 @@
             echo  "<img class='image' src='includes/resources/images/noimgplaceholder.png' style='max-height: 300px;'>";
             echo "<p>No file was attached. The default image will be used.</p>";
         }
-        echo "</div>";
+        echo '</div>
+        <form class="form-signin" onsubmit="addProduct();" method="post" enctype="multipart/form-data" id="productForm">
+        <table style="margin: auto;">
+            <tr>
+                <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
+            </tr>
+            <tr>
+                <td>Product Name: </td>
+                <td><input type="text" name="productName"></td>
+            </tr>
+            <tr>
+                <td>Product Price: </td>
+                <td><input type="number" name="productPrice"></td>
+            </tr>
+            <tr>
+                <td>Product Category: </td>
+                <td>
+                    <select style="width: 100%;" id="productCategory" name="productCategory">';
+                        include ('connection.php');
+                        $sql = 'select name from category;'; 
+                        $result = mysqli_query($dbc, $sql);
+                    
+                        while($row = mysqli_fetch_array($result)){
+                            echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+                        }
+                        
+                        echo '
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Product Description: </td>
+                <td><input type="textarea" name="productDescription"></td>
+            </tr>
+            <tr>
+                <td>Product Stock: </td>
+                <td><input type="number" name="productStock"></td>
+            </tr>
+            <tr>
+                <td colspan=2 style="text-align:center;"><input type="submit" value="Add Product" name="submit"></td>
+            </tr>    
+            ';
+        } else {
+            echo '
+        <form class="form-signin" action="?upload" method="post" enctype="multipart/form-data" id="productForm">
+        <table style="margin: auto;">
+                <tr>
+                    <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
+                </tr>
+                <tr>
+                    <td rowspan=2 style="border-right: 2px solid #003366;"><h6>Select image to upload:</h6></td>
+                    <td style="padding-left: 5px;">
+                        <input type="file" name="productImage" id="productImage"><br><br>
+                        <input type="submit" value="Attach File" name="submit">
+                        </td>
+                </tr>
+            ';
     }
 
     if($_SERVER['QUERY_STRING'] == 'submit'){
@@ -81,65 +137,6 @@ VALUES (
 
 echo '<div id="addProduct">';
 
-if($_SERVER['QUERY_STRING'] == 'upload'){
-    echo '
-<form class="form-signin" action="?submit" method="post" enctype="multipart/form-data" id="productForm">
-<table style="margin: auto;">
-    <tr>
-        <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
-    </tr>
-    <tr>
-        <td>Product Name: </td>
-        <td><input type="text" name="productName"></td>
-    </tr>
-    <tr>
-        <td>Product Price: </td>
-        <td><input type="number" name="productPrice"></td>
-    </tr>
-    <tr>
-        <td>Product Category: </td>
-        <td>
-            <select style="width: 100%;" id="productCategory" name="productCategory">';
-                include ('connection.php');
-                $sql = 'select name from category;'; 
-                $result = mysqli_query($dbc, $sql);
-            
-                while($row = mysqli_fetch_array($result)){
-                    echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
-                }
-                
-                echo '
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>Product Description: </td>
-        <td><input type="textarea" name="productDescription"></td>
-    </tr>
-    <tr>
-        <td>Product Stock: </td>
-        <td><input type="number" name="productStock"></td>
-    </tr>
-    <tr>
-        <td colspan=2 style="text-align:center;"><input type="submit" value="Add Product" name="submit"></td>
-    </tr>    
-    ';
-} else {
-    echo '
-<form class="form-signin" action="?upload" method="post" enctype="multipart/form-data" id="productForm">
-<table style="margin: auto;">
-        <tr>
-            <td colspan=2 style="text-align: center;"><h3>Submit a New Product</h3></td>
-        </tr>
-        <tr>
-            <td rowspan=2 style="border-right: 2px solid #003366;"><h6>Select image to upload:</h6></td>
-            <td style="padding-left: 5px;">
-                <input type="file" name="productImage" id="productImage"><br><br>
-                <input type="submit" value="Attach File" name="submit">
-                </td>
-        </tr>
-    ';
-}
 ?>
 <input name=“MAX_FILE_SIZE” value=“30000” hidden>
         </table>
