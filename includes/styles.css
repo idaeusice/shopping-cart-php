@@ -147,6 +147,13 @@ h1 {
     width: 100%;
 }
 
+/* addProduct */
+.errAddProd {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 /* image styles for the products page */
 .prodImage {
     height: 100%;
