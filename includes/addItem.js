@@ -1,4 +1,3 @@
-// THIS FILE IS UNUSED CURRENTLY, I couldn't get it to work
 $(document).ready(function () {
 
   $('.addItemButton').click(function (e) {
@@ -10,9 +9,12 @@ $(document).ready(function () {
     // put the customer id into a variable
     var cust_id = document.getElementById(customerInputID).value;
 
-    console.log(cust_id, prod_id);
+    // give some feedback when adding an item to the cart
+    var confirmID = '#confirmID' + prod_id;
+    $(confirmID).show(); // display "Item added to cart!" next to the pressed button
 
-    $.ajax({
+
+    $.ajax({ // Ajax to send data to addCartProduct.php
       type: "POST",
       url: "addCartProduct.php",
       data: { "cust_id": cust_id, "prod_id": prod_id, },
@@ -22,6 +24,7 @@ $(document).ready(function () {
       } // end of success
     }); // end of ajax
 
+    $(confirmID).fadeOut(1500, "linear");
   }); // end of click
 
 }); // end of document.ready

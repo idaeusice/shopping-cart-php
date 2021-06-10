@@ -105,6 +105,7 @@
                                     <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
                                     <input id='custID" . $row['prod_id'] . "' type='hidden' name='idOfCust' value='" . $_SESSION['cust_id'] . "'/>
                                 </button>
+                                <div id='confirmID" . $row['prod_id'] . "' class='confirmAdd'>Item added to cart!</div>
                               </form>
                               <div class='result'></div>";
                             }
@@ -210,6 +211,7 @@ else{
                                     <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
                                     <input id='custID" . $row['prod_id'] . "' type='hidden' name='idOfCust' value='" . $_SESSION['cust_id'] . "'/>
                                 </button>
+                                <div id='confirmID" . $row['prod_id'] . "' class='confirmAdd'>Item added to cart!</div>
                               </form>
                               <div class='result'></div>";
                             }

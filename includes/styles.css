@@ -140,6 +140,18 @@ h1 {
     width: 100%;
 }
 
+.addItemButton {
+  float: left;
+}
+
+.confirmAdd {
+    display: none;
+    padding-top: 1.5em;
+    padding-left: 1em;
+    float: left;
+    color: #28A745;
+}
+
 /* cart styling */
 .cartRow {
     max-height: 220px;
