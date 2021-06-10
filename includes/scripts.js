@@ -143,6 +143,34 @@ function validateLogin(){
     }
 }
 
+//passes results to the privacy page to set the user's accept bool. 
+function acceptPrivacy() {
+    $.ajax({
+        type: "POST",
+        url: 'privacy.php',
+        data:{
+             action:'accepted'
+        },
+        success:function(html) {
+            alert(html);
+        }
+    });
+}
+
+function declinePrivacy() {
+    $.ajax({
+        type: "POST",
+        url: 'privacy.php',
+        data:{
+             action:'declined'
+        },
+        success:function(html) {
+            alert(html);
+        }
+    });
+}
+
+
 window.onload = function() { // had to wrap scroll stuff in window.onload otherwise it wouldn't work
 
     window.onscroll = function() { // whenever window is scrolled
