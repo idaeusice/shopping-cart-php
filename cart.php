@@ -17,23 +17,33 @@
         $changeHow = $_POST['submit']; // -1, +1, or Remove+All
         $forWho = $_SESSION['cust_id'];
 
-        if($changeHow == '-1') {
+        if($changeHow == '-1') { // subract 1 from the quantity
           $updateCartSql = "UPDATE cart
                             SET quantity = quantity - 1
                             WHERE prod_id = '$changeQuantityOf'
                             AND cust_id = '$forWho';";
 
           mysqli_query($dbc, $updateCartSql);
-        } elseif($changeHow == '+1') {
+        } elseif($changeHow == '+1') { // add 1 to the quantity
           $updateCartSql = "UPDATE cart
                             SET quantity = quantity + 1
                             WHERE prod_id = '$changeQuantityOf'
                             AND cust_id = '$forWho';";
 
           mysqli_query($dbc, $updateCartSql);
-        } elseif($changeHow == 'Remove+All') {
+        } else { // delete the entire row
+          $updateCartSql = "DELETE FROM cart
+                            WHERE prod_id = '$changeQuantityOf'
+                            AND cust_id = '$forWho';";
 
+          mysqli_query($dbc, $updateCartSql);
         }
+
+        // delete any items in carts that have a quantity of 0 or less
+        $clearEmpty = "DELETE FROM cart
+                       WHERE quantity <= 0;";
+
+        mysqli_query($dbc, $clearEmpty);
 
         // resets $_POST  and the variables so that refreshing the page doesn't increment/decriment quantity
         $changeQuantityOf = 0;
@@ -119,7 +129,7 @@
                     <a href='main.php' class='no-underline'>Start shopping</a>
                   </div>";
         }
-        
+
       } // end of if
     } else { // if not logged in
       echo "<div id='emptyCart'>
