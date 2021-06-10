@@ -111,26 +111,25 @@
             </div>";
             }
         } // end of while rows remain
-
-        if ($totalPrice > 0) {
-            echo "
-            <div class='row'>
-              <div class='col-sm'>
-                <H4>Total:</H4>
-              </div>
-              <div class='col-sm border' style='float: right;'>
-                <H4>$$totalPrice</H4>
-              </div>
-            </div>
-            ";
-        } else {
-            echo "<div class='box'>
-                    <h1 class='message'>Your cart is empty.</h1>
-                    <a href='main.php' class='no-underline'>Start shopping</a>
-                  </div>";
-        }
-
       } // end of if
+
+      if ($totalPrice > 0) { // display total
+          echo "
+          <div class='row'>
+            <div class='col-sm'>
+              <H4>Total:</H4>
+            </div>
+            <div class='col-sm border' style='float: right;'>
+              <H4>$$totalPrice</H4>
+            </div>
+          </div>
+          ";
+      } else { // if no total -> no products in cart so display empty cart message
+          echo "<div class='box'>
+                  <h1 class='message'>Your cart is empty.</h1>
+                  <a href='main.php' class='no-underline'>Start shopping</a>
+                </div>";
+      }
     } else { // if not logged in
       echo "<div id='emptyCart'>
             <h1 class='message'>You are not logged in. Please log in to add items to your cart.</h1>
