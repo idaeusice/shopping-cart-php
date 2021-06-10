@@ -2,16 +2,15 @@
 include ('header.php');
 include ('menu.php');
 
-if($_POST['action'] == 'accepted'){
+if(isset($_POST['action'])){
     //check to ensure user is logged in and their cust_id is set.
     if(isset($_SESSION['cust_id'])){
         include ('connection.php');
+        $privacy = $_REQUEST['action'];
         $customerId = $_SESSION['cust_id'];
-        $sql = 'update customer set privacy=1 where cust_id=' . $customerId . ';';
+        $sql = 'update customer set privacy=' . $privacy . ' where cust_id=' . $customerId . ';';
         $result = mysqli_query($dbc, $sql);
-
-        header("Location: main.php");
-    }
+    } 
 } else {
     echo "
     <div id='privacyContainer' class='container'>

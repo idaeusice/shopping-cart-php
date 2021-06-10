@@ -149,10 +149,7 @@ function acceptPrivacy() {
         type: "POST",
         url: 'privacy.php',
         data:{
-             action:'accepted'
-        },
-        success:function(html) {
-            alert(html);
+            action:'1'
         }
     });
 }
@@ -162,10 +159,7 @@ function declinePrivacy() {
         type: "POST",
         url: 'privacy.php',
         data:{
-             action:'declined'
-        },
-        success:function(html) {
-            alert(html);
+            action:'0'
         }
     });
 }
