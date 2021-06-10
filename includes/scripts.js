@@ -145,7 +145,7 @@ function validateLogin(){
 
 window.onload = function() { // had to wrap scroll stuff in window.onload otherwise it wouldn't work
 
-    window.onscroll = function() {
+    window.onscroll = function() { // whenever window is scrolled
         // for sticky navbar
         stickyNav();
         // for scroll to top button
@@ -153,8 +153,9 @@ window.onload = function() { // had to wrap scroll stuff in window.onload otherw
     };
 
     // for sticky navbar
-    var navbar = document.getElementById("navbar");
+    var navbar = document.getElementById("nav");
     var sticky = navbar.offsetTop;
+
     function stickyNav() {
         if (window.pageYOffset >= sticky) {
             navbar.classList.add("sticky");
