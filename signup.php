@@ -51,7 +51,11 @@
             $_SESSION['last_name'] = $lastName;
             $_SESSION['admin'] = 0;
 
-            header('Location: main.php');
+            if($_SESSION['privacy'] == 1){
+                header("Location: main.php");
+            } else {
+                header("Location: privacy.php");
+            }
         }    
     }
 

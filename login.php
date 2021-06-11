@@ -40,7 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['last_name'] = $row['last_name'];
         $_SESSION['admin'] = $row['admin'];
 
-        header("Location: main.php");
+        if($row['privacy'] == 1){
+            header("Location: main.php");
+        } else {
+            header("Location: privacy.php");
+        }
     } else {
         echo "<script>alert('Incorrect login credentials. Please try again.')</script>";
     }
