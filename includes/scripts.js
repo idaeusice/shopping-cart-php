@@ -150,6 +150,9 @@ function acceptPrivacy() {
         url: 'privacy.php',
         data:{
             action:'1'
+        },
+        success: function(){
+            window.location = 'main.php';
         }
     });
 }
@@ -160,6 +163,9 @@ function declinePrivacy() {
         url: 'privacy.php',
         data:{
             action:'0'
+        },
+        success: function(){
+            window.location = 'main.php';
         }
     });
 }

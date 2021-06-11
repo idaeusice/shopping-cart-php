@@ -7,9 +7,16 @@ if(isset($_POST['action'])){
     if(isset($_SESSION['cust_id'])){
         include ('connection.php');
         $privacy = $_REQUEST['action'];
+        $_SESSION['privacy'] = $privacy;
         $customerId = $_SESSION['cust_id'];
         $sql = 'update customer set privacy=' . $privacy . ' where cust_id=' . $customerId . ';';
         $result = mysqli_query($dbc, $sql);
+
+        if($privacy == 0){
+            session_unset();
+            session_destroy();
+            header("Location: logoutMessage.php");
+        }
     } 
 } else {
     echo "
