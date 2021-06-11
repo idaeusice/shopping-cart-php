@@ -125,13 +125,16 @@
             }
         } // end of while rows remain
 
-      if ($totalPrice > 0) { // display total
-          echo "
-          <div class='row'>
-            <div class='col-sm'>
-              <H4>Total:</H4>
-            </div>
-            ";
+        if ($totalPrice > 0) { // display total
+            echo "
+            <div class='row'>
+              <div class='col-sm'>
+                <H4>Total:</H4>
+              </div>
+              <div class='col-sm'>
+                <H4>$$totalPrice</H4>
+              </div>
+            </div>";
         }
       } else { // if cart empty
         echo "<div class='box'>
