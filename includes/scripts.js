@@ -143,9 +143,37 @@ function validateLogin(){
     }
 }
 
+//passes results to the privacy page to set the user's accept bool. 
+function acceptPrivacy() {
+    $.ajax({
+        type: "POST",
+        url: 'privacy.php',
+        data:{
+            action:'1'
+        },
+        success: function(){
+            window.location = 'main.php';
+        }
+    });
+}
+
+function declinePrivacy() {
+    $.ajax({
+        type: "POST",
+        url: 'privacy.php',
+        data:{
+            action:'0'
+        },
+        success: function(){
+            window.location = 'main.php';
+        }
+    });
+}
+
+
 window.onload = function() { // had to wrap scroll stuff in window.onload otherwise it wouldn't work
 
-    window.onscroll = function() {
+    window.onscroll = function() { // whenever window is scrolled
         // for sticky navbar
         stickyNav();
         // for scroll to top button
@@ -153,8 +181,9 @@ window.onload = function() { // had to wrap scroll stuff in window.onload otherw
     };
 
     // for sticky navbar
-    var navbar = document.getElementById("navbar");
+    var navbar = document.getElementById("nav");
     var sticky = navbar.offsetTop;
+
     function stickyNav() {
         if (window.pageYOffset >= sticky) {
             navbar.classList.add("sticky");

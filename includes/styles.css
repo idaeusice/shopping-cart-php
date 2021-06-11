@@ -259,6 +259,17 @@ h1 {
     text-decoration: none !important;
 }
 
+.card-columns {
+    column-count: 6 !important;
+}
+
+/* privacy page */
+#privacyContainer {
+    margin: 50px auto;
+    text-align: center;
+    border: 2px solid black;
+}
+
 /* Browser-specific Styling */
 
 /* Chrome, Safari, Edge, Opera */

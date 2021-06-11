@@ -124,16 +124,13 @@
             </div>";
             }
         } // end of while rows remain
+      } // end of if
 
-        if ($totalPrice > 0) {
-            echo "
-            <div class='row'>
-              <div class='col-sm'>
-                <H4>Total:</H4>
-              </div>
-              <div class='col-sm border' style='float: right;'>
-                <H4>$$totalPrice</H4>
-              </div>
+      if ($totalPrice > 0) { // display total
+          echo "
+          <div class='row'>
+            <div class='col-sm'>
+              <H4>Total:</H4>
             </div>
             ";
         }
