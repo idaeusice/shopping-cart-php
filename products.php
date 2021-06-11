@@ -202,7 +202,7 @@ else{
                         <div class='col-sm'>
                             <h4>$";
                             print $row['price'] . '</h4><br><h6> Current Stock: ' . $row['units'] . '</h6>';
-                            if(isset($_SESSION['admin']) && !$_SESSION['admin'] == 1 && $_SESSION['privacy'] == 1) {
+                            if(isset($_SESSION['admin']) && !$_SESSION['admin'] == 1) {
                               echo "
                               <form method='post' id='" . $row['prod_id'] . "' action=''>
                                 <button type='submit' class='btn btn-primary addItemButton' data-toggle='modal' data-target='#exampleModal'>
