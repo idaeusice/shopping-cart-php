@@ -1,10 +1,3 @@
-<style>
-    table, tr, td, th {
-        border: 1px solid black;
-        padding: 0.3em;
-    }
-</style>
-
 <?php
     include ('header.php');//title
     include ('menu.php');
