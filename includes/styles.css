@@ -190,6 +190,11 @@ h1 {
     margin-bottom: 2em;
 }
 
+.carousel-item{
+    width: 50%;
+    height: 50%;
+}
+
 #carouselText{
     color: black;
     background-color: white;
@@ -198,7 +203,13 @@ h1 {
     text-align: center;
     width: auto;
     padding: 10px;
-    margin: 0 auto;
+    margin: 25%;
+    margin-top: 8%;
+}
+
+#carouselText > img {
+    max-height: 250px;
+    max-width: 100%;
 }
 
 /* footer -- copyright info, contact details, legalese, etc. */
@@ -271,7 +282,6 @@ h1 {
 }
 
 /* Browser-specific Styling */
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
