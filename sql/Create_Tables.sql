@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `daintree_db`.`customer` (
   `last_name` VARCHAR(45) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `admin` TINYINT(1) NOT NULL DEFAULT 0,
+  `privacy` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`cust_id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) )
 ENGINE = InnoDB

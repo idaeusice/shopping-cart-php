@@ -1,5 +1,4 @@
 <?php
-// THIS FILE IS UNUSED CURRENTLY, I couldn't get it to work
 include ('connection.php');
 
 if(!empty($_POST)) {
