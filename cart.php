@@ -14,7 +14,7 @@
       if($_SERVER["REQUEST_METHOD"] == "POST") { // if a button to add or remove items has been pressed
 
         $changeQuantityOf = $_POST['idOfProd']; // prod_id
-        $changeHow = $_POST['submit']; // -1, +1, or Remove+All
+        $changeHow = $_POST['submit']; // -1, +1, Remove All, or Empty Cart
         $forWho = $_SESSION['cust_id'];
 
         if($changeHow == '-1') { // subract 1 from the quantity
@@ -31,10 +31,15 @@
                             AND cust_id = '$forWho';";
 
           mysqli_query($dbc, $updateCartSql);
-        } else { // delete the entire row
+        } elseif($changeHow == 'Remove All') { // delete the entire row
           $updateCartSql = "DELETE FROM cart
                             WHERE prod_id = '$changeQuantityOf'
                             AND cust_id = '$forWho';";
+
+          mysqli_query($dbc, $updateCartSql);
+        } elseif($changeHow == 'Empty Cart') { // empty the entire cart
+          $updateCartSql = "DELETE FROM cart
+                            WHERE cust_id = '$forWho';";
 
           mysqli_query($dbc, $updateCartSql);
         }
@@ -79,7 +84,15 @@
         } // end of while rows remain
       } // end of if
 
-      if(mysqli_num_rows($result) > 0) { // if there is more than 1 row
+      if(mysqli_num_rows($result) > 0) { // if there is more than 0 rows
+
+        // Empty the entire cart
+        echo "
+          <form action='' method='post'>
+            <input class='btn btn-outline-danger' type='submit' name='submit' value='Empty Cart' style='margin-top: 0.5em'/>
+          </form>
+        ";
+
         while($row = mysqli_fetch_array($result)) { // loop through each row
         if($row['quantity'] > 0){
           echo "
@@ -123,14 +136,14 @@
               </div>
             </div>
             ";
-        } else {
-            echo "<div class='box'>
-                    <h1 class='message'>Your cart is empty.</h1>
-                    <a href='main.php' class='no-underline'>Start shopping</a>
-                  </div>";
         }
 
-      } // end of if
+      } else { // if cart empty
+        echo "<div class='box'>
+                <h1 class='message'>Your cart is empty.</h1>
+                <a href='main.php' class='no-underline'>Start shopping</a>
+              </div>";
+      }
     } else { // if not logged in
       echo "<div id='emptyCart'>
             <h1 class='message'>You are not logged in. Please log in to add items to your cart.</h1>

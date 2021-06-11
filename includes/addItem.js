@@ -10,9 +10,7 @@ $(document).ready(function () {
     var cust_id = document.getElementById(customerInputID).value;
 
     // give some feedback when adding an item to the cart
-    var confirmID = '#confirmID' + prod_id;
-    $(confirmID).show(); // display "Item added to cart!" next to the pressed button
-
+    var confirmID = '#confirmID' + prod_id
 
     $.ajax({ // Ajax to send data to addCartProduct.php
       type: "POST",
@@ -21,10 +19,12 @@ $(document).ready(function () {
       success: function (data) {
         $('.result').html(data);
         $('#' + prod_id)[0].reset();
+        $(confirmID).stop(true, true); // display "Item added to cart!" next to the pressed button
+        $(confirmID).show();
+        $(confirmID).fadeOut(1500, "linear");
       } // end of success
     }); // end of ajax
 
-    $(confirmID).fadeOut(1500, "linear");
   }); // end of click
 
 }); // end of document.ready
