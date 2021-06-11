@@ -124,7 +124,6 @@
             </div>";
             }
         } // end of while rows remain
-      } // end of if
 
       if ($totalPrice > 0) { // display total
           echo "
@@ -134,7 +133,6 @@
             </div>
             ";
         }
-
       } else { // if cart empty
         echo "<div class='box'>
                 <h1 class='message'>Your cart is empty.</h1>
