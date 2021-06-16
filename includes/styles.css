@@ -191,25 +191,27 @@ h1 {
 }
 
 .carousel-item{
-    width: 50%;
+    margin-top: 15%;
     height: 50%;
+    text-align: center;
+    width: 50%;
 }
 
-#carouselText{
+/* carousel background image */
+.carousel-item > img {
+    position: relative;
+}
+
+.carouselText{
     color: black;
     background-color: white;
     border-radius: 2px;
     position: absolute;
-    text-align: center;
-    width: auto;
-    padding: 10px;
-    margin: 25%;
-    margin-top: 8%;
 }
 
 #carouselText > img {
-    max-height: 250px;
-    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
 }
 
 /* footer -- copyright info, contact details, legalese, etc. */
