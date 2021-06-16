@@ -83,5 +83,3 @@ this feature is only for admins -->
 
     include ('footer.php');
 ?>
-
-</div> <!-- end of content div -->

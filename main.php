@@ -15,5 +15,3 @@
 <?php
     include ('footer.php');
 ?>
-
-</div> <!-- end of content div -->
