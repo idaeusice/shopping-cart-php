@@ -12,6 +12,14 @@
     include ('connection.php');
 
     if(isset($_SESSION['cust_id'])) { // if logged in (login.php)
+      if($_SERVER['QUERY_STRING'] == 'checkout'){
+        $stripe = new \Stripe\StripeClient("sk_test_51Ivr8VKB9Qa5a2djkOyshBa9ASlJKMTpo11qkn7x6ZW64z6jJW2mzlGmo4weNf279b2sHf1emgvWBLNqJN76ZwcH00cFRKujyI");
+        $ch = $stripe->charges->capture(
+          'ch_1J2kl9KB9Qa5a2djKEGZsyG5',
+          [],
+          ['api_key' => 'sk_test_51Ivr8VKB9Qa5a2djkOyshBa9ASlJKMTpo11qkn7x6ZW64z6jJW2mzlGmo4weNf279b2sHf1emgvWBLNqJN76ZwcH00cFRKujyI']
+        );
+      }
       if($_SERVER["REQUEST_METHOD"] == "POST") { // if a button to add or remove items has been pressed
 
         $changeQuantityOf = $_POST['idOfProd']; // prod_id
@@ -144,9 +152,10 @@
         <div class="container" style="margin-bottom: 20px; text-align:center;">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
-            Checkout
+              Checkout
             </button>
-
+        ';
+        echo '
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
