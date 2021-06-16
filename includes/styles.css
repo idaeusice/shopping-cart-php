@@ -159,6 +159,11 @@ h1 {
     width: 100%;
 }
 
+/* order history page */
+.top-margin {
+    margin-top: 120px;
+}
+
 /* addProduct */
 .errAddProd {
     margin-top: 40px;
