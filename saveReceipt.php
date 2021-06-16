@@ -1,8 +1,6 @@
 <?php
-
-include ('header.php');//title
-include ('menu.php');
-
+    include ('header.php');//title
+    include ('menu.php');
 ?>
 
 <div class='main'>
@@ -37,12 +35,6 @@ include ('menu.php');
     </div>
 </div>
 
-
-
-<?php
-
-include ('footer.php');
-
-?>
+<?php include ('footer.php'); ?>
 
 
