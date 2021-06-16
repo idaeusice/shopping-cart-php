@@ -1,4 +1,5 @@
 <?php
+    require_once('includes/resources/stripe/init.php');
     print "<div id='header'>";
     include ('header.php');
     include ('menu.php');
@@ -116,13 +117,15 @@
                         print $row['quantity'] . " in cart at $" . $row['price'] . " each.";
                     echo "</h6>
                     <input id='prodID" . $row['prod_id'] . "' type='hidden' name='idOfProd' value='" . $row['prod_id'] . "'/>
-                    <input class='btn btn-outline-warning' type='submit' name='submit' value='-1'/>
-                    <input class='btn btn-outline-success' type='submit' name='submit' value='+1'/><br>
+                    <input class='btn btn-outline-warning' type='submit' name='submit' value=' -1 '/>
+                    <input class='btn btn-outline-success' type='submit' name='submit' value='+1 '/><br>
                     <input class='btn btn-outline-danger' type='submit' name='submit' value='Remove All' style='margin-top: 0.5em'/>
                 </form>
                 </div>
             </div>";
             }
+
+            
         } // end of while rows remain
 
         if ($totalPrice > 0) { // display total
@@ -136,6 +139,44 @@
               </div>
             </div>";
         }
+        //checkout button -- opens modal to handle payment processing. 
+        echo '
+        <div class="container" style="margin-bottom: 20px; text-align:center;">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+            Checkout
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: scroll;">
+        ';
+            //modal body goes here
+            echo '
+            <form class="form">
+              <p>'.$totalPrice.'</p>
+            </form>
+            ';
+            //end modal body
+        echo '
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Continue</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        ';
       } else { // if cart empty
         echo "<div class='box'>
                 <h1 class='message'>Your cart is empty.</h1>
