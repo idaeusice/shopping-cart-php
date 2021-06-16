@@ -1,4 +1,5 @@
 <?php
+    require_once('includes/resources/stripe/init.php');
     print "<div id='header'>";
     include ('header.php');
     include ('menu.php');
@@ -160,11 +161,10 @@
         ';
             //modal body goes here
             echo '
-            <div class="form">
+            <form class="form">
               <p>'.$totalPrice.'</p>
-            </div>
+            </form>
             ';
-
             //end modal body
         echo '
                 </div>
