@@ -108,6 +108,10 @@
                                 <div id='confirmID" . $row['prod_id'] . "' class='confirmAdd'>Item added to cart!</div>
                               </form>
                               <div class='result'></div>";
+                            } 
+
+                            if (!isset($_SESSION['cust_id'])) { // if not logged in show link to login in place of 'add to cart'
+                                echo "<a href='login.php'>Login to buy products</a>";
                             }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
@@ -214,6 +218,10 @@ else{
                                 <div id='confirmID" . $row['prod_id'] . "' class='confirmAdd'>Item added to cart!</div>
                               </form>
                               <div class='result'></div>";
+                            } 
+                            
+                            if (!isset($_SESSION['cust_id'])) { // if not logged in show link to login in place of 'add to cart'
+                                echo "<a href='login.php'>Login to buy products</a>";
                             }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
