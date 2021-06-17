@@ -14,7 +14,7 @@ function writeReceiptData() { // function to write receipt data to text file
     date_default_timezone_set("America/Vancouver");
 
     // path to receipt folder
-    $dirPath = "receipts";
+    $dirPath = "includes/receipts";
 
     // filename combination of cust_id and date/time
     $file = "CID" . $_SESSION['cust_id'] . "-" . date('Y-m-d-H-i-s') . ".txt";  
@@ -40,7 +40,7 @@ if(isset($_POST['name']) && isset($_POST['email']) && $_POST['cc1'] != '' && $_P
     // write receipt data to file, store result
     $wroteSuccessfully = writeReceiptData();
 
-    echo" 
+    echo " 
     <div class='container' style='margin-top: 220px; text-align:center;'>";
 
     echo "
