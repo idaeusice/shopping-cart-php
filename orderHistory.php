@@ -15,13 +15,28 @@
 
       while($orderRow = mysqli_fetch_array($orderResults)) { // loop through order_id for the customer
 
-        echo "<H4 style='color: #003366;'>Order ID: " . $orderRow['order_id'] . " Date: " . $orderRow['order_date'] . "</H4>";
+        $orderTotalPrice = 0; // reset price for the next order
+        // get just the price to allow for incrementing
+        $orderPrice = "SELECT price
+                       FROM order_detail
+                       WHERE order_id = " . $orderRow['order_id'] . ";";
+
+        $orderTotalArray = mysqli_query($dbc, $orderPrice);
+
+        if(mysqli_num_rows($orderTotalArray) > 0) {
+          while($row = mysqli_fetch_array($orderTotalArray)) { // while loop to increment totalPrice.
+            $orderTotalPrice += $row['price'];
+          } // end of while rows remain
+        } // end of if
+
+        // order divider shows order_id, date and total price of the order
+        echo "<H4 style='color: #003366; border-top: solid;'>Order ID: " . $orderRow['order_id'] . ", Date: " . $orderRow['order_date'] . "</H4>";
 
         // get the deails for that row
-        $orderDetail = 'SELECT name, image, o.price, amount, (o.price * amount) AS "total"
+        $orderDetail = "SELECT name, image, o.price, amount, (o.price * amount) AS 'detail_total'
                         FROM order_detail o INNER JOIN product USING (prod_id)
-                        WHERE order_id = ' . $orderRow['order_id'] . '
-                        GROUP BY prod_id;';
+                        WHERE order_id = " . $orderRow['order_id'] . "
+                        GROUP BY prod_id;";
       
         $detailResults = mysqli_query($dbc, $orderDetail);
 
@@ -47,12 +62,13 @@
                   </div>";
                   echo "
                   <div class='col-sm'>
-                    <H4 style='margin-top: 15%; color: green;'>
-                      $" . $detailRow['total'] . "
+                    <H4 style='margin-top: 15%; color: green; float: right;'>
+                      $" . $detailRow['detail_total'] . "
                     </H4>
                   </div>
                 </div>";
-        }
+        } // end of orderDetail loop
+        echo "<H4 style='color: #003366; border-bottom: solid;'>Total: $" . $orderTotalPrice . "</H4><br><br>";
       } // end of orderHistory while loop
 
     echo '</div>';
