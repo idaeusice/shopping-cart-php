@@ -59,7 +59,7 @@ function writeReceiptData() { // function to write receipt data to text file
         $data .= $row['name'] . ": $" . $row['price'] . " x " . $row['quantity'] . "\n";
     }
 
-    $data .= "----------------------------------------------------\nTotal: $" . sprintf("%0.2f", $totalPrice) . "\n\nThank you for shopping at DainTree.\n";
+    $data .= "----------------------------------------------------\nTotal: $" . sprintf("%0.2f", $totalPrice) . "\n\nThank you for shopping at DainTree.";
 
     // full filname ex. receipts/CID4-2021-06-15-03-40-00.txt 
     // LOCK_EX puts lock on file so nothing else can edit while it is writing
