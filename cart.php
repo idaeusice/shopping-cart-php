@@ -161,7 +161,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -170,18 +170,33 @@
         ';
             //modal body goes here
             echo '
-            <form class="form">
-              <p>'.$totalPrice.'</p>
-            </form>
+            <form class="form" action="checkout.php" method="post">
+              <input id="name" name="name" class="form-control" placeholder="Full Name" value="' . (isset($_SESSION['first_name']) && isset($_SESSION['last_name'])? $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] : '' ) . '">
+              <br/>
+              <input id="email" name="email" class="form-control" placeholder="Email Address" value="' . (isset($_SESSION['email']) ? $_SESSION['email'] : '' ) . '">
+              <br/>
+              <table>
+              <tr><td>Credit Card:</td></tr>
+                <tr>
+                  <td><input id="cc1" name="cc1" class="form-control" placeholder="XXXX" maxlength="4"></td>
+                  <td><input id="cc2" name="cc2" class="form-control" placeholder="XXXX" maxlength="4"></td>
+                  <td><input id="cc3" name="cc3" class="form-control" placeholder="XXXX" maxlength="4"></td>
+                  <td><input id="cc4" name="cc4" class="form-control" placeholder="XXXX" maxlength="4"></td>
+                </tr>
+              </table>
+              <input type="hidden" id="amount" name="amount" value="' . $totalPrice . '" class="form-control" placeholder="$' . $totalPrice . '" readonly>
+              <br/>
             ';
             //end modal body
         echo '
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Continue</button>
+                    <button id="checkout-button">Test</button>
+                    <input type="submit" class="btn btn-primary"></button>
                 </div>
                 </div>
+              </form> <!-- form end -->
             </div>
             </div>
         </div>
@@ -200,6 +215,7 @@
     }
 ?>
 </div>
+
 <script src='includes/scripts.js'></script>
 <script src='includes/addItem.js'></script>
 <?php
