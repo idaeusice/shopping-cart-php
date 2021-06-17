@@ -20,7 +20,7 @@ function writeReceiptData() { // function to write receipt data to text file
     $file = "CID" . $_SESSION['cust_id'] . "-" . date('Y-m-d-H-i-s') . ".txt";  
 
     // data to insert into file
-    $data = "RECEIPT for " . $_SESSION['email'] . " at daintree.com on " . date('Y-m-d \a\t H:i:s') . " (UTC-07:00)\n" . 
+    $data = "RECEIPT for " . $_POST['email'] . " at daintree.com on " . date('Y-m-d \a\t H:i:s') . " (UTC-07:00)\n" . 
             "\n" .
             "\n" .
             "\n" .
@@ -53,7 +53,7 @@ if(isset($_POST['name']) && isset($_POST['email']) && $_POST['cc1'] != '' && $_P
 
     echo "
     </div>";
-    
+
 } else {
     //payment details failure
     echo" 
