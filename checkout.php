@@ -37,8 +37,9 @@ function writeReceiptData() { // function to write receipt data to text file
 if(isset($_POST['name']) && isset($_POST['email']) && $_POST['cc1'] != '' && $_POST['cc2'] != '' && $_POST['cc3'] != '' && $_POST['cc4'] != ''){
     //successful payment details entry
 
-    // write receipt data to file, store result
+    /*** START write receipt ***/
     $wroteSuccessfully = writeReceiptData();
+    /*** END write receipt ***/
 
     echo " 
     <div class='container' style='margin-top: 220px; text-align:center;'>";
@@ -53,6 +54,19 @@ if(isset($_POST['name']) && isset($_POST['email']) && $_POST['cc1'] != '' && $_P
 
     echo "
     </div>";
+
+    /*** START save order history ***/
+
+    
+
+    /*** END save order history ***/
+
+    /*** START empty cart ***/
+    $updateCartSql = "DELETE FROM cart
+                      WHERE cust_id = '" . $_SESSION['cust_id'] . "';";
+
+    mysqli_query($dbc, $updateCartSql);
+    /*** END empty cart ***/
 
 } else {
     //payment details failure
