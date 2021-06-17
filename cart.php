@@ -143,7 +143,7 @@
                 <H4>Total:</H4>
               </div>
               <div class='col-sm'>
-                <H4>$$totalPrice</H4>
+                <H4>$" . sprintf("%0.2f", $totalPrice) /*makes sure number has 2 decimal places to the right*/ . "</H4>
               </div>
             </div>";
         }
@@ -184,7 +184,7 @@
                   <td><input id="cc4" name="cc4" class="form-control" placeholder="XXXX" maxlength="4" minlength="4" pattern="^\d{4}$" required></td>
                 </tr>
               </table>
-              <input type="hidden" id="amount" name="amount" value="' . $totalPrice . '" class="form-control" placeholder="$' . $totalPrice . '" readonly>
+              <input type="hidden" id="amount" name="amount" value="' . sprintf("%0.2f", $totalPrice) /*makes sure number has 2 decimal places to the right*/ . '" class="form-control" placeholder="$' . sprintf("%0.2f", $totalPrice) . '" readonly>
               <br/>
             ';
             //end modal body
