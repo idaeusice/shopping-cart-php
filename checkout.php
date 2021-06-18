@@ -34,6 +34,8 @@ if(isset($_POST['stripeToken'])){
                         WHERE cust_id = '".$_SESSION['cust_id'] . "';";
 
     mysqli_query($dbc, $emptyCartSql);
+} else {
+    echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Payment was unsuccessful. Your payment may have already been processed. </h2></div>';
 }
 
 // write receipt data to file, store result
