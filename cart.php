@@ -151,55 +151,21 @@
         echo '
         <div class="container" style="margin-bottom: 20px; text-align:center;">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
-              Checkout
-            </button>
-        ';
-        echo '
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="max-height: 600px; overflow-y: scroll;">
-        ';
-            //modal body goes here
-            echo '
-            <form class="form" id="checkout" action="checkout.php" method="post" onsubmit="return validateCheckout();">
-              <input required maxlength="90" id="name" name="name" class="form-control" placeholder="Full Name" value="' . (isset($_SESSION['first_name']) && isset($_SESSION['last_name'])? $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] : '' ) . '">
-              <br/>
-              <input required maxlength="45" type="email" id="email" name="email" class="form-control" placeholder="Email Address" value="' . (isset($_SESSION['email']) ? $_SESSION['email'] : '' ) . '">
-              <br/>
-              <table>
-              <tr><td>Credit Card:</td></tr>
-                <tr>
-                  <td><input id="cc1" name="cc1" class="form-control" placeholder="XXXX" maxlength="4" minlength="4" pattern="^\d{4}$" required></td>
-                  <td><input id="cc2" name="cc2" class="form-control" placeholder="XXXX" maxlength="4" minlength="4" pattern="^\d{4}$" required></td>
-                  <td><input id="cc3" name="cc3" class="form-control" placeholder="XXXX" maxlength="4" minlength="4" pattern="^\d{4}$" required></td>
-                  <td><input id="cc4" name="cc4" class="form-control" placeholder="XXXX" maxlength="4" minlength="4" pattern="^\d{4}$" required></td>
-                </tr>
-              </table>
-              <input type="hidden" id="amount" name="amount" value="' . $totalPrice . '" class="form-control" placeholder="$' . $totalPrice . '" readonly>
-              <br/>
             ';
-            //end modal body
-        echo '
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button id="checkout-button">Test</button>
-                    <input type="submit" class="btn btn-primary"></button>
-                </div>
-                </div>
-              </form> <!-- form end -->
-            </div>
-            </div>
-        </div>
+                require_once('./config.php'); 
+                ?>
+
+                <form action="checkout.php" method="post">
+                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                          data-key="<?php echo $stripe['publishable_key']; ?>"
+                          data-description="Complete your Daintree purchase"
+                          data-amount="<?php echo $totalPrice*100 ?>"
+                          amount="<?php echo $totalPrice*100 ?>"
+                          data-locale="auto"></script>
+                </form>
+                <?php
+                echo '
+          </div>
         ';
       } else { // if cart empty
         echo "<div class='box'>
