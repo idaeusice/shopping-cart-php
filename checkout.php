@@ -9,31 +9,46 @@ include ('menu.php');
 //    sk_test_51Ivr8VKB9Qa5a2djkOyshBa9ASlJKMTpo11qkn7x6ZW64z6jJW2mzlGmo4weNf279b2sHf1emgvWBLNqJN76ZwcH00cFRKujyI
 
 if(isset($_POST['stripeToken'])){
-require_once('./config.php');
+    require_once('./config.php');
 
-$token  = $_POST['stripeToken'];
-$email  = $_POST['stripeEmail'];
+    $token  = $_POST['stripeToken'];
+    $email  = $_POST['stripeEmail'];
+    $amount = $_POST['amt'];
 
-$customer = \Stripe\Customer::create([
-    'email' => $email,
-    'source'  => $token,
-]);
+    $customer = \Stripe\Customer::create([
+        'email' => $email,
+        'source'  => $token,
+    ]);
 
-$charge = \Stripe\Charge::create([
-    'customer' => $customer->id,
-    'amount'   => 5000,
-    'currency' => 'usd',
-]);
+    $charge = \Stripe\Charge::create([
+        'customer' => $customer->id,
+        'amount'   => $amount,
+        'currency' => 'usd',
+    ]);
 
-echo '<div class="container" style="text-align: center;"><h2>Successfully charged!</h2></div>';
+    echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Successfully charged!</h2></div>';
 
-include ('connection.php');
+    include ('connection.php');
 
-$emptyCartSql = "DELETE FROM cart
-                    WHERE cust_id = '".$_SESSION['cust_id'] . "';";
+    $emptyCartSql = "DELETE FROM cart
+                        WHERE cust_id = '".$_SESSION['cust_id'] . "';";
 
-mysqli_query($dbc, $emptyCartSql);
+    mysqli_query($dbc, $emptyCartSql);
 }
+
+// write receipt data to file, store result
+$wroteSuccessfully = writeReceiptData();
+
+echo " 
+<div class='container' style='margin-top: 220px; text-align:center;'>";
+
+if ($wroteSuccessfully !== false)
+    echo "<p>Successfully wrote receipt data to file.</p>";
+else
+    echo "<p>Failed to write receipt data to file.</p>";
+
+echo "
+</div>";
 
 function writeReceiptData() { // function to write receipt data to text file
 
@@ -46,7 +61,7 @@ function writeReceiptData() { // function to write receipt data to text file
     $file = "CID" . $_SESSION['cust_id'] . "-" . date('Y-m-d-H-i-s') . ".txt";  
 
     // data to insert into file
-    $data = "RECEIPT for " . $_POST['email'] . " at daintree.com on " . date('Y-m-d \a\t H:i:s') . " (UTC-07:00)\n" . 
+    $data = "RECEIPT for " . $_POST['stripeEmail'] . " at daintree.com on " . date('Y-m-d \a\t H:i:s') . " (UTC-07:00)\n" . 
             "\n" .
             "\n" .
             "\n" .
@@ -60,35 +75,6 @@ function writeReceiptData() { // function to write receipt data to text file
     return file_put_contents($dirPath . "/" . $file, $data, LOCK_EX);
 }
 
-if(isset($_POST['name']) && isset($_POST['email']) && $_POST['cc1'] != '' && $_POST['cc2'] != '' && $_POST['cc3'] != '' && $_POST['cc4'] != ''){
-    //successful payment details entry
-
-    // write receipt data to file, store result
-    $wroteSuccessfully = writeReceiptData();
-
-    echo " 
-    <div class='container' style='margin-top: 220px; text-align:center;'>";
-
-    echo "
-        <p>Card is: " . $_POST['cc1'] . $_POST['cc2'] . $_POST['cc3'] . $_POST['cc4'] . "</p>";
-    
-    if ($wroteSuccessfully !== false)
-        echo "<p>Successfully wrote receipt data to file.</p>";
-    else
-        echo "<p>Failed to write receipt data to file.</p>";
-
-    echo "
-    </div>";
-
-} else {
-    //payment details failure
-    echo" 
-    <div class='container' style='margin-top: 220px; text-align:center;'>
-        <p>There was an error processing your payment. </p>
-        <p>Your card was not charged.</p>
-    </div>
-    ";
-}
 
 ?>
 
