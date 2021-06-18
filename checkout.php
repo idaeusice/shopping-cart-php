@@ -28,12 +28,15 @@ if(isset($_POST['stripeToken'])){
 
     echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Successfully charged!</h2></div>';
 
+    //queries to update tables based on purchase data.
     include ('connection.php');
+    //update order history?
 
+    //empty cart:
     $emptyCartSql = "DELETE FROM cart
                         WHERE cust_id = '".$_SESSION['cust_id'] . "';";
-
     mysqli_query($dbc, $emptyCartSql);
+
 } else {
     echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Payment was unsuccessful. Your payment may have already been processed. </h2></div>';
 }
