@@ -155,7 +155,7 @@
                 require_once('./config.php'); 
                 ?>
 
-                <form action="checkout.php" method="post">
+                <form action="checkout.php?paid" method="post">
                   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="<?php echo $stripe['publishable_key']; ?>"
                           data-description="Complete your Daintree purchase"
