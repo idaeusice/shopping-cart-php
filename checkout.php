@@ -32,6 +32,9 @@ if(isset($_POST['stripeToken'])){
     include ('connection.php');
     //update order history?
 
+    // write receipt data to file, store result
+    $wroteSuccessfully = writeReceiptData();
+
     //empty cart:
     $emptyCartSql = "DELETE FROM cart
                         WHERE cust_id = '".$_SESSION['cust_id'] . "';";
@@ -41,8 +44,6 @@ if(isset($_POST['stripeToken'])){
     echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Payment was unsuccessful. Your payment may have already been processed. </h2></div>';
 }
 
-// write receipt data to file, store result
-$wroteSuccessfully = writeReceiptData();
 
 echo " 
 <div class='container' style='margin-top: 220px; text-align:center;'>";
@@ -111,50 +112,6 @@ function writeReceiptData() { // function to write receipt data to text file
     // LOCK_EX puts lock on file so nothing else can edit while it is writing
     // file_put_contents returns bites written or false on failure
     return file_put_contents($dirPath . "/" . $file, $data, LOCK_EX);
-}
-
-if(isset($_POST['name']) && isset($_POST['email']) && $_POST['cc1'] != '' && $_POST['cc2'] != '' && $_POST['cc3'] != '' && $_POST['cc4'] != ''){
-    //successful payment details entry
-
-    /*** START write receipt ***/
-    $wroteSuccessfully = writeReceiptData();
-    /*** END write receipt ***/
-
-    echo " 
-    <div class='container' style='margin-top: 220px; text-align:center;'>";
-
-    echo "
-        <p>Card is: " . $_POST['cc1'] . $_POST['cc2'] . $_POST['cc3'] . $_POST['cc4'] . "</p>";
-    
-    if ($wroteSuccessfully !== false)
-        echo "<p>Successfully wrote receipt data to file.</p>";
-    else
-        echo "<p>Failed to write receipt data to file.</p>";
-
-    echo "
-    </div>";
-
-    /*** START save order history ***/
-
-    // work in progress
-
-    /*** END save order history ***/
-
-    /*** START empty cart ***/
-    $updateCartSql = "DELETE FROM cart
-                      WHERE cust_id = '" . $_SESSION['cust_id'] . "';";
-
-    //mysqli_query($dbc, $updateCartSql);
-    /*** END empty cart ***/
-
-} else {
-    //payment details failure
-    echo" 
-    <div class='container' style='margin-top: 220px; text-align:center;'>
-        <p>There was an error processing your payment. </p>
-        <p>Your card was not charged.</p>
-    </div>
-    ";
 }
 
 ?>
