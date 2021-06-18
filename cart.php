@@ -160,8 +160,8 @@
                           data-key="<?php echo $stripe['publishable_key']; ?>"
                           data-description="Complete your Daintree purchase"
                           data-amount="<?php echo $totalPrice*100 ?>"
-                          amount="<?php echo $totalPrice*100 ?>"
                           data-locale="auto"></script>
+                  <input type="hidden" name="amt" value="<?php echo $totalPrice*100 ?>">
                 </form>
                 <?php
                 echo '
