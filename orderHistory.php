@@ -17,7 +17,7 @@
 
         $orderTotalPrice = 0; // reset price for the next order
         // get just the price to allow for incrementing
-        $orderPrice = "SELECT price
+        $orderPrice = "SELECT (price * amount) AS 'grand_total'
                        FROM order_detail
                        WHERE order_id = " . $orderRow['order_id'] . ";";
 
@@ -25,7 +25,7 @@
 
         if(mysqli_num_rows($orderTotalArray) > 0) {
           while($row = mysqli_fetch_array($orderTotalArray)) { // while loop to increment totalPrice.
-            $orderTotalPrice += $row['price'];
+            $orderTotalPrice += $row['grand_total'];
           } // end of while rows remain
         } // end of if
 
@@ -56,7 +56,7 @@
                   </div>
                   <div class='col-sm'>
                     <H4 style='margin-top: 15%;'>";
-                      echo "<span style='color: green;'>" . $detailRow['amount'] . "</span> " .
+                      echo "<span style='color: green;'>" . $detailRow['amount'] . "</span> x " .
                            $detailRow['name'] . "
                     </H4>
                   </div>";
