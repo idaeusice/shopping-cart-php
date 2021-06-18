@@ -94,8 +94,8 @@ function writeReceiptData() { // function to write receipt data to text file
     $file = "CID" . $_SESSION['cust_id'] . "-" . date('Y-m-d-H-i-s') . ".txt";  
 
     // data to insert into file
-    $data = "Hello " . $_POST['name'] . ",\n" .
-            "This is your RECEIPT from daintree.com. email: " . $_POST['email'] . " date: " . date('Y-m-d \a\t H:i:s') . " (UTC-07:00)\n" . 
+    $data = "Hello " . $_SESSION['first_name'] . ",\n" .
+            "This is your RECEIPT from daintree.com. email: " . $_SESSION['email'] . " date: " . date('Y-m-d \a\t H:i:s') . " (UTC-07:00)\n" . 
             "\n" .
             "You ordered:\n" .
             "\n";
