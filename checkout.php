@@ -35,6 +35,9 @@ if(isset($_POST['stripeToken'])){
     // write receipt data to file, store result
     $wroteSuccessfully = writeReceiptData();
 
+    // update order history
+    updateOrderHistory();
+
     //empty cart:
     $emptyCartSql = "DELETE FROM cart
                         WHERE cust_id = '".$_SESSION['cust_id'] . "';";
@@ -48,7 +51,7 @@ if(isset($_POST['stripeToken'])){
 echo " 
 <div class='container' style='margin-top: 220px; text-align:center;'>";
 
-if ($wroteSuccessfully !== false)
+if (isset($wroteSuccessfully) && $wroteSuccessfully !== false)
     echo "<p>Successfully wrote receipt data to file.</p>";
 else
     echo "<p>Failed to write receipt data to file.</p>";
@@ -114,9 +117,44 @@ function writeReceiptData() { // function to write receipt data to text file
     return file_put_contents($dirPath . "/" . $file, $data, LOCK_EX);
 }
 
+function updateOrderHistory() {
+
+    include ('connection.php');
+
+    /*** START order history ***/
+    // insert customer ID and date into order history table
+    $orderHistorySQL = "INSERT INTO order_history (cust_id, date) 
+                        VALUES (" . $_SESSION['cust_id'] . ", '" . date("Y-m-d") . "');";
+
+    mysqli_query($dbc, $orderHistorySQL);
+    /*** END order history ***/
+
+    /*** START order detail ***/
+    // get all info on products in cart
+    $itemSQL = 'SELECT (p.price * c.quantity) AS total, p.prod_id, p.image, p.name, p.description, p.price, c.quantity
+              FROM cart c INNER JOIN product p USING (prod_id)
+              WHERE cust_id = ' . $_SESSION['cust_id'] . '
+              GROUP BY p.prod_id;';
+
+    $itemResult = mysqli_query($dbc, $itemSQL);
+
+    // get last order ID number
+    $getLastOrderIDSQL = "SELECT order_id FROM order_history ORDER BY order_id DESC LIMIT 1;";
+    $lastIDResult = mysqli_query($dbc, $getLastOrderIDSQL);
+    $orderID = mysqli_fetch_array($lastIDResult);
+    $orderIDRow = $orderID['order_id'];
+
+    // while there are items in cart insert each one into the order detail table
+    while ($row = mysqli_fetch_array($itemResult)) {
+        $orderDetailSQL = "INSERT INTO order_detail (order_id, prod_id, amount, price) VALUES ($orderIDRow, " . $row['prod_id'] . ", " . $row['quantity'] . ", " . $row['price'] . ");";
+        mysqli_query($dbc, $orderDetailSQL);
+    }
+    /*** END order detail ***/
+}
+
 ?>
 
-<div class='container' style='margin-top: 220px; text-align:center;'>
+<div class='container box' style='margin-top: 220px; text-align:center;'>
     <a href="main.php" class="no-underline">Continue shopping</a>
 </div>
 
