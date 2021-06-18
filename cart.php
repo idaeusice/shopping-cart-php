@@ -143,7 +143,7 @@
                 <H4>Total:</H4>
               </div>
               <div class='col-sm'>
-                <H4>$$totalPrice</H4>
+                <H4>$" . sprintf("%0.2f", $totalPrice) /*makes sure number has 2 decimal places to the right*/ . "</H4>
               </div>
             </div>";
         }
