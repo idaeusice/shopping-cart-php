@@ -35,6 +35,9 @@ if(isset($_POST['stripeToken'])){
     // write receipt data to file, store result
     $wroteSuccessfully = writeReceiptData();
 
+    // update order history
+    updateOrderHistory();
+
     //empty cart:
     $emptyCartSql = "DELETE FROM cart
                         WHERE cust_id = '".$_SESSION['cust_id'] . "';";
@@ -112,6 +115,15 @@ function writeReceiptData() { // function to write receipt data to text file
     // LOCK_EX puts lock on file so nothing else can edit while it is writing
     // file_put_contents returns bites written or false on failure
     return file_put_contents($dirPath . "/" . $file, $data, LOCK_EX);
+}
+
+function updateOrderHistory() {
+
+    include ('connection.php');
+
+    $orderHistorySQL = "INSERT INTO order_history (cust_id, date) VALUES (" . $_SESSION['cust_id'] . ", '" . date("Y-m-d") . "');";
+
+    mysqli_query($dbc, $orderHistorySQL);
 }
 
 ?>
