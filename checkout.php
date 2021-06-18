@@ -8,6 +8,52 @@ include ('menu.php');
 //    private key:
 //    sk_test_51Ivr8VKB9Qa5a2djkOyshBa9ASlJKMTpo11qkn7x6ZW64z6jJW2mzlGmo4weNf279b2sHf1emgvWBLNqJN76ZwcH00cFRKujyI
 
+if(isset($_POST['stripeToken'])){
+    require_once('./config.php');
+
+    $token  = $_POST['stripeToken'];
+    $email  = $_POST['stripeEmail'];
+    $amount = $_POST['amt'];
+
+    $customer = \Stripe\Customer::create([
+        'email' => $email,
+        'source'  => $token,
+    ]);
+
+    $charge = \Stripe\Charge::create([
+        'customer' => $customer->id,
+        'amount'   => $amount,
+        'currency' => 'usd',
+    ]);
+
+    echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Successfully charged!</h2></div>';
+
+    //queries to update tables based on purchase data.
+    include ('connection.php');
+    //update order history?
+
+    //empty cart:
+    $emptyCartSql = "DELETE FROM cart
+                        WHERE cust_id = '".$_SESSION['cust_id'] . "';";
+    mysqli_query($dbc, $emptyCartSql);
+
+} else {
+    echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Payment was unsuccessful. Your payment may have already been processed. </h2></div>';
+}
+
+// write receipt data to file, store result
+$wroteSuccessfully = writeReceiptData();
+
+echo " 
+<div class='container' style='margin-top: 220px; text-align:center;'>";
+
+if ($wroteSuccessfully !== false)
+    echo "<p>Successfully wrote receipt data to file.</p>";
+else
+    echo "<p>Failed to write receipt data to file.</p>";
+
+echo "
+</div>";
 
 function writeReceiptData() { // function to write receipt data to text file
 
