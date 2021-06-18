@@ -48,7 +48,7 @@ if(isset($_POST['stripeToken'])){
 echo " 
 <div class='container' style='margin-top: 220px; text-align:center;'>";
 
-if ($wroteSuccessfully !== false)
+if (isset($wroteSuccessfully) && $wroteSuccessfully !== false)
     echo "<p>Successfully wrote receipt data to file.</p>";
 else
     echo "<p>Failed to write receipt data to file.</p>";
@@ -116,7 +116,7 @@ function writeReceiptData() { // function to write receipt data to text file
 
 ?>
 
-<div class='container' style='margin-top: 220px; text-align:center;'>
+<div class='container box' style='margin-top: 220px; text-align:center;'>
     <a href="main.php" class="no-underline">Continue shopping</a>
 </div>
 
