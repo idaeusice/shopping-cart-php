@@ -223,6 +223,7 @@ else{
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
                                 echo "<button class='btn btn-danger' id='feature" . $row['prod_id'] . "' onclick='feature('feature" . $row['prod_id'] . "')'>Feature</button>";
+                                echo "<button class='btn btn-danger' style='margin-left: 3px;' id='remove" . $row['prod_id'] . "' onclick='remove('" . $row['prod_id'] . "')'>Remove</button>";
                             }
                             echo"
                             </div>
