@@ -135,14 +135,12 @@ else{
     echo '
     <div id="carouselControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" style="height: 500px;">
-            <div class="carousel-item active">
-                <div id="carouselText">
-                    <h1>New to Daintree</h1>
-                    <p>This is also why we’re allowing players to rent their own servers and create
-                    their own private worlds with their own rules. Another great update for MMO fans,
-                    this time bringing mounted combat to Lord of the Rings Online.</p>
+            <div id="#carousel-itemFirst" class="carousel-item active">
+                <div id="carouselTextFirst">
+                    <h1>New to Daintree</h1><br>
+                    <p>Check out the latest and greatest tech to Daintree. We update products often, so
+                    be sure to check back frequently for up-to-date availability.</p>
                 </div>
-                <img class="w-100" src="includes/resources/images/carousel1.jpg" alt="Main slide">
             </div>';
             $bgImageCount = 0;
             $carouselSql = 'select * from product';
@@ -157,7 +155,6 @@ else{
                             <p> ' . $row['description'] . ' </p>
                             <img class="w-50" src="' . $row['image'] . '">
                         </div>
-                        <img class="w-100" src="includes/resources/images/carousel2.jpg" alt="Product slide">
                     </div>';
                 }
             }
