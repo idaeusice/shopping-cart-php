@@ -9,7 +9,8 @@
       // get the order history from the database for the customer
       $orderHistory = "SELECT order_id, cust_id, date_format(date, '%M %D, %Y') AS order_date
                        FROM order_history
-                       WHERE cust_id = " . $_SESSION['cust_id'] . ";";
+                       WHERE cust_id = " . $_SESSION['cust_id'] . "
+                       ORDER BY order_id desc;";
       
       $orderResults = mysqli_query($dbc, $orderHistory);
 
