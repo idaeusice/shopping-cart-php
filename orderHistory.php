@@ -14,7 +14,11 @@
       
       $orderResults = mysqli_query($dbc, $orderHistory);
 
+      $isEmpty = true; // for if order history is empty
+
       while($orderRow = mysqli_fetch_array($orderResults)) { // loop through order_id for the customer
+
+        $isEmpty = false; // if can fetch rows, order history not empty
 
         $orderTotalPrice = 0; // reset price for the next order
         // get just the price to allow for incrementing
@@ -73,6 +77,13 @@
       } // end of orderHistory while loop
 
     echo '</div>';
+
+    if ($isEmpty) { // if order history is empty
+      echo "<div class='box'>
+                <h1 class='message'>You haven't placed any order yet.</h1>
+                <a href='main.php' class='no-underline'>Start shopping</a>
+              </div>";
+    }
   } else { // not logged in
     echo '
       <div class="top-margin container">You must be logged in to view order history</div>
