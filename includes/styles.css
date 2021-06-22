@@ -193,7 +193,7 @@ h1 {
 .carousel-inner {
     margin-bottom: 2em;
     border: 2px solid black;
-    background-image: url('resources/images/carousel4.jpg');
+    background-image: url('resources/images/bg.jpg');
     background-size: cover;
 }
 
