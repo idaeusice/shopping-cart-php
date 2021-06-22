@@ -1,6 +1,5 @@
 <?php
 include ('header.php');
-include ('menu.php');
 
 if(isset($_POST['action'])){
     //check to ensure user is logged in and their cust_id is set.
