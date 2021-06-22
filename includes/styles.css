@@ -143,12 +143,28 @@ h1 {
   float: left;
 }
 
+.featureItemButton {
+    float: left;
+}
+
+.archiveItemButton {
+    float: left;
+}
+
 .confirmAdd {
     display: none;
     padding-top: 1.5em;
     padding-left: 1em;
     float: left;
     color: #28A745;
+}
+
+.confirmToggleArchive {
+    display: none;
+    padding-top: 0.4em;
+    padding-left: 1em;
+    float: left;
+    color: #28a745;
 }
 
 /* cart styling */
