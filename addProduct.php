@@ -111,7 +111,7 @@
             </tr>
             <tr>
                 <td>Product Price: </td>
-                <td><input type="number" name="productPrice"></td>
+                <td><input type="number" name="productPrice" step="any"></td>
             </tr>
             <tr>
                 <td>Product Category: </td>

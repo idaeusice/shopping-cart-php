@@ -108,14 +108,20 @@
                                 <div id='confirmID" . $row['prod_id'] . "' class='confirmAdd'>Item added to cart!</div>
                               </form>
                               <div class='result'></div>";
-                            } 
+                            }
 
                             if (!isset($_SESSION['cust_id'])) { // if not logged in show link to login in place of 'add to cart'
                                 echo "<a href='login.php'>Login to buy products</a>";
                             }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
-                                echo "<button class='btn btn-danger' id='feature" . $row['prod_id'] . "' onclick='feature('feature" . $row['prod_id'] . "')'>Feature</button>";
+                                echo "<form method='post' id='" . $row['prod_id'] . "' action=''>
+                                        <button class='btn btn-danger featureItemButton' id='feature" . $row['prod_id'] . "'>Feature</button>
+                                        <button class='btn btn-danger archiveItemButton' style='margin-left: 3px;' id='remove" . $row['prod_id'] . "'>Toggle Archive</button>
+                                        <div id='confirmID" . $row['prod_id'] . "' class='confirmToggleArchive'>Item archive status toggled!</div>
+                                      </form>
+                                      <div class='result'></div>
+                                ";
                             }
                             echo"
                             </div>
@@ -175,7 +181,7 @@ else{
         $allResult = mysqli_query($dbc, $allSql);
 
         while($row = mysqli_fetch_array($allResult)){
-            if($row['archive'] == 0) {
+            if($row['archive'] == 0 || (isset($_SESSION['admin']) && $_SESSION['admin'] == 1)) {
                 echo "
                 <div class='row border-bottom'>
                 <div class='col-sm border-right'>
@@ -228,7 +234,13 @@ else{
                             }
 
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
-                                echo "<button class='btn btn-danger' id='feature" . $row['prod_id'] . "' onclick='feature('feature" . $row['prod_id'] . "')'>Feature</button>";
+                                echo "<form method='post' id='" . $row['prod_id'] . "' action=''>
+                                        <button class='btn btn-danger featureItemButton' id='feature" . $row['prod_id'] . "'>Feature</button>
+                                        <button class='btn btn-danger archiveItemButton' style='margin-left: 3px;' id='remove" . $row['prod_id'] . "'>Toggle Archive</button>
+                                        <div id='confirmID" . $row['prod_id'] . "' class='confirmToggleArchive'>Item status toggled!</div>
+                                      </form>
+                                      <div class='result'></div>
+                                ";
                             }
                             echo"
                             </div>
@@ -240,4 +252,4 @@ else{
         }
 }//end else (shows all products)
 ?>
-<script src="includes/addItem.js"></script>
+<script src="includes/productButtons.js"></script>

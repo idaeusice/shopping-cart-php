@@ -26,7 +26,7 @@ if(isset($_POST['stripeToken'])){
         'currency' => 'usd',
     ]);
 
-    echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Successfully charged!</h2></div>';
+    echo '<div class="container" style="text-align: center; margin-top: 100px;"><h2>Successfully charged!</h2></div>';
 
     //queries to update tables based on purchase data.
     include ('connection.php');
@@ -44,15 +44,15 @@ if(isset($_POST['stripeToken'])){
     mysqli_query($dbc, $emptyCartSql);
 
 } else {
-    echo '<div class="container" style="text-align: center; margin-top: 300px;"><h2>Payment was unsuccessful. Your payment may have already been processed. </h2></div>';
+    echo '<div  style="text-align: center; margin-top: 100px;"><h2>Payment was unsuccessful. Your payment may have already been processed. </h2></div>';
 }
 
 
 echo " 
-<div class='container' style='margin-top: 220px; text-align:center;'>";
+<div class='' style='text-align:center;'>";
 
-if (isset($wroteSuccessfully) && $wroteSuccessfully !== false)
-    echo "<p>Successfully wrote receipt data to file.</p>";
+if (isset($wroteSuccessfully) && $wroteSuccessfully !== false) //                   \/ open in new tab                                              \/ force download it (instead of opening it by default)  
+    echo "<p>Successfully wrote receipt data to file. <a href='$wroteSuccessfully' target='_blank'>View file</a> or <a href='$wroteSuccessfully' download>download it</a>.</p>"; // put name of file returned as href for download URL
 else
     echo "<p>Failed to write receipt data to file.</p>";
 
@@ -109,12 +109,16 @@ function writeReceiptData() { // function to write receipt data to text file
         $data .= $row['name'] . ": $" . $row['price'] . " x " . $row['quantity'] . "\n";
     }
 
-    $data .= "----------------------------------------------------\nTotal: $" . sprintf("%0.2f", $totalPrice) . "\n\nThank you for shopping at DainTree.";
+    $data .= "----------------------------------------------------\nTotal: $" . sprintf("%0.2f", $totalPrice) . "\n\nThank you for shopping at Daintree.";
 
     // full filname ex. receipts/CID4-2021-06-15-03-40-00.txt 
     // LOCK_EX puts lock on file so nothing else can edit while it is writing
     // file_put_contents returns bites written or false on failure
-    return file_put_contents($dirPath . "/" . $file, $data, LOCK_EX);
+    if (file_put_contents($dirPath . "/" . $file, $data, LOCK_EX) !== false) { // if wrote successfully (doesn't return false) then return file path/name
+        return $dirPath . "/" . $file;
+    } else { // otherwise return false
+        return false;
+    }
 }
 
 function updateOrderHistory() {
@@ -154,7 +158,7 @@ function updateOrderHistory() {
 
 ?>
 
-<div class='container box' style='margin-top: 220px; text-align:center;'>
+<div style='text-align:center; margin-bottom: 100px;'>
     <a href="main.php" class="no-underline">Continue shopping</a>
 </div>
 
