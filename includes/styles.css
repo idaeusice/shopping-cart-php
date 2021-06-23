@@ -172,10 +172,22 @@ h1 {
 
 /* image styles for the products page */
 .prodImage {
+    position: relative;
     height: 100%;
     border: 1px solid lightgray;
     border-radius: 2px;
     margin: auto;
+}
+
+#arcLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    clear: float;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
 }
 
 .image {

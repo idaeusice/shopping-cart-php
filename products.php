@@ -186,7 +186,13 @@ else{
                         } else {
                             print $row['image'];
                         };
-                        echo "'>
+                        echo "' >";
+
+                        if($row['archive'] == 1){
+                            echo "<div id='arcLayer'>Archived</div>";
+                        }
+                        
+                        echo "
                     </div>
                 </div>
 
