@@ -42,12 +42,35 @@ $(document).ready(function () {
       success: function (data) {
         $('.result').html(data);
         $('#' + prod_id)[0].reset();
-        $(confirmID).stop(true, true); // display "Item added to cart!" next to the pressed button
+        $(confirmID).stop(true, true); // display "Item status toggled!" next to the pressed button
         $(confirmID).show();
         $(confirmID).fadeOut(1500, "linear");
       } // end of success
     }); // end of ajax
 
   }); // end of archive item click
+
+  $('.archiveItemButton').click(function (e) { // click an archive button on product page as admin
+    e.preventDefault();
+    // get the id of the form that the button is part of (the form id is just the product id)
+    var prod_id = $(this).parent().attr('id');
+
+    // give some feedback when adding an item to the cart
+    var confirmID = '#confirmID' + prod_id
+
+    $.ajax({ // Ajax to send data to ajaxCalls.php
+      type: "POST",
+      url: "ajaxCalls.php",
+      data: {"prod_id": prod_id, "type": "toggleFeatured",}, // needs product id and type of call
+      success: function (data) {
+        $('.result').html(data);
+        $('#' + prod_id)[0].reset();
+        $(confirmID).stop(true, true); // display "Item status toggled!" next to the pressed button
+        $(confirmID).show();
+        $(confirmID).fadeOut(1500, "linear");
+      } // end of success
+    }); // end of ajax
+
+  }); // end of feature item click
 
 }); // end of document.ready

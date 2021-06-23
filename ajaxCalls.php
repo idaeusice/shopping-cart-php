@@ -58,6 +58,33 @@ if(!empty($_POST)) {
 
       mysqli_query($dbc, $toggleArchiveStatus);
     }
-  } // end of toggle archive
+    // end of toggle archive
+  } elseif ($_POST['type'] == "toggleFeatured"){
+      // get the status of the item to see if it's archived or not
+      $toggleFeatured = "SELECT prod_id, feature
+      FROM product
+      WHERE prod_id = '$prodID';
+      ";
+
+      $featuredResults = mysqli_query($dbc, $toggleFeatured);
+      // put the result row into an array
+      $row = mysqli_fetch_array($featuredResults);
+
+      if($row['feature'] == 0) { // if not featured, then make it featured
+      $toggleFeaturedStatus = "UPDATE product
+                      SET feature = 1
+                      WHERE prod_id = '$prodID';
+                      ";
+
+      mysqli_query($dbc, $toggleFeaturedStatus);
+      } elseif($row['feature'] == 1) { // id not featured, then re-instate it
+      $toggleFeaturedStatus = "UPDATE product
+                      SET feature = 0
+                      WHERE prod_id = '$prodID';
+                      ";
+
+      mysqli_query($dbc, $toggleFeaturedStatus);
+    }
+  }// end of toggle featured
 } // end of request method
 ?>
